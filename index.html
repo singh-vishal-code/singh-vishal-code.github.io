@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Colorful Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishal Singh | Economics & Data Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
@@ -36,7 +39,7 @@
 
   <!-- Navigation -->
   <header class="flex justify-between items-center p-6 bg-gradient-to-r from-pink-500 to-yellow-500 text-white sticky top-0 z-50">
-    <h1 class="text-2xl font-bold">Your Name</h1>
+    <h1 class="text-2xl font-bold">Vishal Singh</h1>
     <nav class="space-x-6">
       <a href="#about" class="hover:underline">About</a>
       <a href="#projects" class="hover:underline">Projects</a>
@@ -49,38 +52,40 @@
   <!-- Hero Section -->
   <section class="text-center py-20 animated-bg text-white relative">
     <div class="relative z-10">
-      <h2 class="text-4xl font-extrabold mb-4 animate-pulse">Hello, I'm Your Name 👋</h2>
-      <p class="text-xl mb-6">Aspiring [Your Profession] | Passionate about [Your Passion]</p>
+      <h2 class="text-4xl font-extrabold mb-4 animate-pulse">Hello, I'm Vishal Singh 👋</h2>
+      <p class="text-xl mb-6">Postgraduate Student | Economics & Data Analysis Enthusiast | Passionate about Economic Research</p>
       <a href="#projects" class="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition">View My Work</a>
     </div>
     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-20 px-6 bg-white">
+  <section id="about" class="py-20 px-6 bg-white" data-aos="fade-up">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6 text-pink-500">About Me</h2>
-      <p class="text-lg text-gray-700">I am a passionate [Your Profession] with an interest in [Your Interests]. My journey began with a curiosity for [Field], and since then, I have worked on multiple exciting projects that challenged my creativity and skills.</p>
+      <p class="text-lg text-gray-700">I'm Vishal Singh, currently pursuing a Master's in Business at Queensland University of Technology, Australia. I hold a bachelor's degree from Doon University, Uttarakhand with a CGPA of 7.93. I’m passionate about economics, data analysis, and turning numbers into narratives. With experience at Decathlon as an OSL for Mountain Sports, I blend analytical skills with real-world insights.</p>
     </div>
   </section>
+
   <!-- Resume Section -->
-  <section id="resume" class="py-20 px-6 bg-gradient-to-r from-yellow-100 to-pink-200">
+  <section id="resume" class="py-20 px-6 bg-gradient-to-r from-yellow-100 to-pink-200" data-aos="fade-up">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6 text-yellow-600">Resume</h2>
-      <p class="text-lg text-gray-700 mb-8">Here is a quick snapshot of my education and experience.</p>
+      <p class="text-lg text-gray-700 mb-8">Here's an overview of my education and professional journey.</p>
       <div class="grid md:grid-cols-2 gap-8">
         <div class="card p-6 bg-white rounded-2xl shadow-lg">
           <h3 class="text-xl font-semibold text-pink-500 mb-2">Education 🎓</h3>
           <ul class="text-gray-700">
-            <li><strong>Masters:</strong> Master of Business, QUT, Australia</li>
+            <li><strong>Masters:</strong> Master of Business, QUT, Australia (2025-2027)</li>
             <li><strong>Bachelors:</strong> Doon University, Uttarakhand (7.93 CGPA)</li>
           </ul>
         </div>
         <div class="card p-6 bg-white rounded-2xl shadow-lg">
           <h3 class="text-xl font-semibold text-pink-500 mb-2">Experience 💼</h3>
           <ul class="text-gray-700">
-            <li>OSL - Mountain Sports, Decathlon India</li>
-            <li>Volunteering - Prakriti Environmental Club & IITK Samanway</li>
+            <li>OSL - Mountain Sports, Decathlon, New Delhi</li>
+            <li>Volunteering - Prakriti Environmental Club, IITK Samanway</li>
+            <li>Investment Banking Winter Intern - Jefferies Australia (Applied)</li>
           </ul>
         </div>
       </div>
@@ -88,51 +93,37 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-20 px-6 bg-white">
+  <section id="projects" class="py-20 px-6 bg-white" data-aos="fade-up">
     <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-pink-500">Projects 🚀</h2>
-      <p class="text-lg text-gray-700 mb-10">Here are some of the projects I've worked on.</p>
+      <h2 class="text-3xl font-bold mb-6 text-pink-500">Projects & Certifications 🚀</h2>
       <div class="grid md:grid-cols-3 gap-8">
         <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
           <h3 class="text-xl font-semibold mb-2 text-pink-700">Portfolio Website</h3>
-          <p class="text-gray-700 mb-4">A personal portfolio website showcasing my skills and projects.</p>
-          <a href="#" class="text-pink-600 hover:underline">View Project →</a>
+          <p class="text-gray-700 mb-4">My personal, interactive, and colorful portfolio showcasing projects and experiences.</p>
         </div>
         <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
-          <h3 class="text-xl font-semibold mb-2 text-pink-700">Data Analytics Projects</h3>
-          <p class="text-gray-700 mb-4">Projects completed as part of the Google Data Analytics Certificate.</p>
-          <a href="#" class="text-pink-600 hover:underline">View Project →</a>
+          <h3 class="text-xl font-semibold mb-2 text-pink-700">Google Data Analytics Certificate</h3>
+          <p class="text-gray-700 mb-4">Completed Google-certified Data Analytics Professional Certificate course.</p>
         </div>
         <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
-          <h3 class="text-xl font-semibold mb-2 text-pink-700">Python Learning Game</h3>
-          <p class="text-gray-700 mb-4">A game concept designed to teach Python basics interactively.</p>
-          <a href="#" class="text-pink-600 hover:underline">View Project →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Blog Section -->
-  <section id="blog" class="py-20 px-6 bg-gradient-to-r from-pink-100 to-yellow-50">
-    <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-yellow-500">Blog 📝</h2>
-      <p class="text-lg text-gray-700 mb-10">Some thoughts and write-ups on my learning journey.</p>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <h3 class="text-xl font-semibold text-pink-600 mb-2">Why I chose QUT for my Master's 🎓</h3>
-          <p class="text-gray-700 mb-4">My research journey, considerations, and why QUT stood out for me.</p>
-          <a href="#" class="text-pink-600 hover:underline">Read More →</a>
-        </div>
-        <div class="card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <h3 class="text-xl font-semibold text-pink-600 mb-2">Learning Python with Games 🕹️</h3>
-          <p class="text-gray-700 mb-4">Exploring fun ways to learn coding with interactive games.</p>
-          <a href="#" class="text-pink-600 hover:underline">Read More →</a>
+          <h3 class="text-xl font-semibold mb-2 text-pink-700">HSBC | Mastercard | Standard Bank Simulations</h3>
+          <p class="text-gray-700 mb-4">Real-world job simulations in commercial banking and behavioral economics.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Blog Section -->
+  <section id="blog" class="py-20 px-6 bg-gradient-to-r from-pink-100 to-yellow-50" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-yellow-500">Blog 📝</h2>
+      <p class="text-lg text-gray-700 mb-4">Insights and reflections on my learning journey in economics and data.</p>
+      <p class="text-gray-700">Coming soon: articles on economic models, data visualization, and global markets.</p>
+    </div>
+  </section>
+
   <!-- Contact Section -->
-  <section id="contact" class="py-20 px-6 bg-white">
+  <section id="contact" class="py-20 px-6 bg-white" data-aos="fade-up">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6 text-pink-500">Contact Me 📬</h2>
       <p class="text-lg text-gray-700 mb-8">I'd love to connect! Drop me a message.</p>
@@ -145,13 +136,25 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="py-10 bg-gradient-to-r from-yellow-200 to-pink-200 text-center text-gray-700">
     <div class="mb-4">
-      <a href="#" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      <a href="#" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-github"></i> GitHub</a>
-      <a href="#" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fas fa-envelope"></i> Email</a>
+      <a href="https://www.linkedin.com/in/vishal-singh-iitk-eco/" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://github.com/singh-vishal-code" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-github"></i> GitHub</a>
+      <a href="mailto:vishalsingh272876@gmail.com" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fas fa-envelope"></i> Email</a>
     </div>
-    <p>&copy; 2025 Your Name. All Rights Reserved.</p>
+    <p>&copy; 2025 Vishal Singh. All Rights Reserved.</p>
   </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  </script>
+
+</body>
+
+</html>
+
 
