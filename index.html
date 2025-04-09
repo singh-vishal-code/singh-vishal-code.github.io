@@ -1,267 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vishal Singh | Economics Portfolio</title>
-  <meta name="description" content="Vishal Singh's professional economics and data analysis portfolio." />
-  <meta name="author" content="Vishal Singh" />
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/7/7e/Crystal_Project_web.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Colorful Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <style>
-    :root {
-      --bg-color: #f9f9f9;
-      --text-color: #2c3e50;
-      --accent-color: #4b6cb7;
-      --card-bg: #ffffff;
-      --card-hover: #f0f0f0;
-      --nav-bg: #34495e;
-      --footer-bg: #34495e;
-    }
-
-    body.dark-mode {
-      --bg-color: #1e1e2f;
-      --text-color: #e0e0e0;
-      --accent-color: #a29bfe;
-      --card-bg: #2c2c3f;
-      --card-hover: #383856;
-      --nav-bg: #1f1f30;
-      --footer-bg: #1f1f30;
-    }
-
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Merriweather', serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      overflow-x: hidden;
-      transition: background 0.5s, color 0.5s;
+      background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
     }
-
-    /* Parallax Background */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 200%;
-      background: url('https://www.transparenttextures.com/patterns/graph-paper.png');
-      background-size: 400px;
-      background-repeat: repeat;
-      opacity: 0.05;
-      z-index: -1;
-      transform: translateY(0);
-      transition: transform 0.2s;
-    }
-
-    nav {
-      background: var(--nav-bg);
-      padding: 15px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--accent-color);
-    }
-
-    header {
-      text-align: center;
-      padding: 50px 20px;
-      background: linear-gradient(to right, var(--accent-color), #182848);
-      color: white;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.8em;
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 1.2em;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
     .card {
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, background 0.3s;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .card:hover {
-      background: var(--card-hover);
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
     }
-
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .animated-bg {
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
     }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: var(--footer-bg);
-      color: white;
-    }
-
-    .toggle-btn {
-      background: var(--card-bg);
-      border: 2px solid var(--accent-color);
-      color: var(--accent-color);
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      margin-top: 15px;
-      transition: all 0.3s;
-    }
-
-    .toggle-btn:hover {
-      background: var(--accent-color);
-      color: white;
-    }
-
-    .whatsapp-box {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-    }
-
-    .whatsapp-box img {
-      width: 30px;
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
   </style>
 </head>
 
-<body>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-    <button class="toggle-btn" onclick="toggleMode()">Toggle Mode</button>
-  </nav>
+<body class="text-gray-800">
 
-  <header>
-    <h1>Vishal Singh</h1>
-    <p>Postgraduate Student | Economic Sciences | Data Analysis & Research</p>
+  <!-- Navigation -->
+  <header class="flex justify-between items-center p-6 bg-gradient-to-r from-pink-500 to-yellow-500 text-white sticky top-0 z-50">
+    <h1 class="text-2xl font-bold">Your Name</h1>
+    <nav class="space-x-6">
+      <a href="#about" class="hover:underline">About</a>
+      <a href="#projects" class="hover:underline">Projects</a>
+      <a href="#resume" class="hover:underline">Resume</a>
+      <a href="#blog" class="hover:underline">Blog</a>
+      <a href="#contact" class="hover:underline">Contact</a>
+    </nav>
   </header>
 
-  <div class="container">
-    <div class="card" id="about">
-      <h2>About Me</h2>
-      <p>I'm Vishal Singh, a postgraduate student in Economic Sciences at IIT Kanpur with a passion for economics and data-driven decision making.</p>
+  <!-- Hero Section -->
+  <section class="text-center py-20 animated-bg text-white relative">
+    <div class="relative z-10">
+      <h2 class="text-4xl font-extrabold mb-4 animate-pulse">Hello, I'm Your Name 👋</h2>
+      <p class="text-xl mb-6">Aspiring [Your Profession] | Passionate about [Your Passion]</p>
+      <a href="#projects" class="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition">View My Work</a>
     </div>
+    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
+  </section>
 
-    <div class="card" id="education">
-      <h2>Education</h2>
-      <ul>
-        <li><strong>IIT Kanpur</strong> — M.Sc. Economics, 2026 (CPI: 8.53/10)</li>
-        <li><strong>University of Delhi</strong> — B.A. (Hons) Economics, 2024 (CGPA: 8.014/10)</li>
-        <li><strong>Army Public School</strong> — XII: 94.8%, X: 96%</li>
-      </ul>
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 bg-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-pink-500">About Me</h2>
+      <p class="text-lg text-gray-700">I am a passionate [Your Profession] with an interest in [Your Interests]. My journey began with a curiosity for [Field], and since then, I have worked on multiple exciting projects that challenged my creativity and skills.</p>
     </div>
-
-    <div class="card" id="experience">
-      <h2>Experience</h2>
-      <ul>
-        <li>Research Intern — International Journal for Research in Law and Management (Mar 2025)</li>
-        <li>Research & Marketing Intern — Younity (May 2022)</li>
-        <li>Research Sub-Head — Wirtschaft, DU (Sep 2023 - Apr 2024)</li>
-        <li>Volunteer — GenderCell, Prakriti, IITK Samanvay</li>
-      </ul>
+  </section>
+  <!-- Resume Section -->
+  <section id="resume" class="py-20 px-6 bg-gradient-to-r from-yellow-100 to-pink-200">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-yellow-600">Resume</h2>
+      <p class="text-lg text-gray-700 mb-8">Here is a quick snapshot of my education and experience.</p>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="card p-6 bg-white rounded-2xl shadow-lg">
+          <h3 class="text-xl font-semibold text-pink-500 mb-2">Education 🎓</h3>
+          <ul class="text-gray-700">
+            <li><strong>Masters:</strong> Master of Business, QUT, Australia</li>
+            <li><strong>Bachelors:</strong> Doon University, Uttarakhand (7.93 CGPA)</li>
+          </ul>
+        </div>
+        <div class="card p-6 bg-white rounded-2xl shadow-lg">
+          <h3 class="text-xl font-semibold text-pink-500 mb-2">Experience 💼</h3>
+          <ul class="text-gray-700">
+            <li>OSL - Mountain Sports, Decathlon India</li>
+            <li>Volunteering - Prakriti Environmental Club & IITK Samanway</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card" id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li><strong>Research Paper:</strong> <a href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830_Human_Development_Journey_of_">Human Development Journey of Uttar Pradesh after 1991 reforms</a></li>
-        <li><strong>CPI Analysis:</strong> <a href="https://github.com/singh-vishal-code/CPI-Analysis">Analyzing Inflation Trends Over Time</a></li>
-      </ul>
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-pink-500">Projects 🚀</h2>
+      <p class="text-lg text-gray-700 mb-10">Here are some of the projects I've worked on.</p>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
+          <h3 class="text-xl font-semibold mb-2 text-pink-700">Portfolio Website</h3>
+          <p class="text-gray-700 mb-4">A personal portfolio website showcasing my skills and projects.</p>
+          <a href="#" class="text-pink-600 hover:underline">View Project →</a>
+        </div>
+        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
+          <h3 class="text-xl font-semibold mb-2 text-pink-700">Data Analytics Projects</h3>
+          <p class="text-gray-700 mb-4">Projects completed as part of the Google Data Analytics Certificate.</p>
+          <a href="#" class="text-pink-600 hover:underline">View Project →</a>
+        </div>
+        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
+          <h3 class="text-xl font-semibold mb-2 text-pink-700">Python Learning Game</h3>
+          <p class="text-gray-700 mb-4">A game concept designed to teach Python basics interactively.</p>
+          <a href="#" class="text-pink-600 hover:underline">View Project →</a>
+        </div>
+      </div>
     </div>
-
-    <div class="card" id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:vishalsingh272876@gmail.com">vishalsingh272876@gmail.com</a></p>
-      <p>Phone: +91-9098272876</p>
-      <p>
-        <a href="https://www.linkedin.com/in/vishal-singh-iitk-eco/">LinkedIn</a> |
-        <a href="https://github.com/singh-vishal-code">GitHub</a> |
-        <a href="https://medium.com/@ECO-fin">Medium</a> |
-        <a href="https://www.hackerrank.com/profile/__coded_vishal__">HackerRank</a>
-      </p>
+  </section>
+  <!-- Blog Section -->
+  <section id="blog" class="py-20 px-6 bg-gradient-to-r from-pink-100 to-yellow-50">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-yellow-500">Blog 📝</h2>
+      <p class="text-lg text-gray-700 mb-10">Some thoughts and write-ups on my learning journey.</p>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <h3 class="text-xl font-semibold text-pink-600 mb-2">Why I chose QUT for my Master's 🎓</h3>
+          <p class="text-gray-700 mb-4">My research journey, considerations, and why QUT stood out for me.</p>
+          <a href="#" class="text-pink-600 hover:underline">Read More →</a>
+        </div>
+        <div class="card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <h3 class="text-xl font-semibold text-pink-600 mb-2">Learning Python with Games 🕹️</h3>
+          <p class="text-gray-700 mb-4">Exploring fun ways to learn coding with interactive games.</p>
+          <a href="#" class="text-pink-600 hover:underline">Read More →</a>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <footer>
-    <p>&copy; 2025 Vishal Singh. All rights reserved.</p>
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6 bg-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-pink-500">Contact Me 📬</h2>
+      <p class="text-lg text-gray-700 mb-8">I'd love to connect! Drop me a message.</p>
+      <form class="grid gap-6">
+        <input type="text" placeholder="Your Name" class="p-3 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400" required>
+        <input type="email" placeholder="Your Email" class="p-3 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400" required>
+        <textarea placeholder="Your Message" class="p-3 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400" rows="4" required></textarea>
+        <button type="submit" class="bg-pink-500 text-white py-3 rounded-xl hover:bg-pink-600 transition-colors duration-300">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 bg-gradient-to-r from-yellow-200 to-pink-200 text-center text-gray-700">
+    <div class="mb-4">
+      <a href="#" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-github"></i> GitHub</a>
+      <a href="#" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fas fa-envelope"></i> Email</a>
+    </div>
+    <p>&copy; 2025 Your Name. All Rights Reserved.</p>
   </footer>
 
-  <a class="whatsapp-box" href="https://wa.me/919098272876" target="_blank" title="Let's chat on WhatsApp!">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </a>
-
-  <script>
-    // Dark / Light mode toggle
-    function toggleMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-
-    // Scroll animations
-    const cards = document.querySelectorAll('.card');
-    const parallax = document.body;
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      parallax.style.setProperty('--scroll', scrollY * 0.2 + 'px');
-
-      cards.forEach(card => {
-        const cardTop = card.offsetTop;
-        const cardHeight = card.offsetHeight;
-        if (scrollY > cardTop - window.innerHeight + cardHeight / 4) {
-          card.classList.add('visible');
-        }
-      });
-    });
-  </script>
-
-</body>
-
-</html>
