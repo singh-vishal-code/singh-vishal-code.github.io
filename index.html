@@ -4,61 +4,39 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vishal Singh | Fun Portfolio 🎉</title>
-    <meta name="description" content="Vishal Singh's personal portfolio website. Postgraduate student at IIT Kanpur, Economics & Data Analysis enthusiast. Connect for projects, research, and collaboration!">
+    <title>Vishal Singh | Economics Portfolio</title>
+    <meta name="description" content="Vishal Singh's professional portfolio. Postgraduate student at IIT Kanpur, Economics & Data Analysis enthusiast. Connect for projects, research, and collaboration!">
     <meta name="keywords" content="Vishal Singh, IIT Kanpur, Economics, Data Analysis, Portfolio, Research">
     <meta name="author" content="Vishal Singh">
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/7/7e/Crystal_Project_web.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html {
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Comic Neue', cursive;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #fff4e6;
+            background-color: #f4f6f8;
             color: #333;
             line-height: 1.6;
-            transition: background-color 0.5s, color 0.5s;
-            background-image: linear-gradient(45deg, #ffecd2, #fcb69f);
-            overflow-x: hidden;
         }
 
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffecd2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        #loader div {
-            border: 5px solid #ff758c;
-            border-top: 5px solid #ffb347;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Print-friendly adjustments */
+        @media print {
+            nav, .whatsapp-box, #progressBar, footer {
+                display: none;
+            }
+            body {
+                background: white;
+                color: black;
+            }
+            section {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
         }
 
         #progressBar {
@@ -66,76 +44,68 @@
             top: 0;
             left: 0;
             width: 0%;
-            height: 4px;
-            background: #ff758c;
+            height: 3px;
+            background: #005f73;
             z-index: 1500;
             transition: width 0.25s ease;
         }
 
         header {
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            background: #0a9396;
             color: white;
             padding: 30px 20px;
             text-align: center;
-            border-bottom: 5px dotted #ffb347;
-            animation: bounce 2s infinite;
+            border-bottom: 4px solid #005f73;
         }
 
         nav {
-            background: #ffb347;
+            background: #005f73;
             text-align: center;
             padding: 15px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         nav a {
             color: #fff;
-            margin: 0 20px;
+            margin: 0 15px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
             transition: color 0.3s;
         }
 
         nav a:hover {
-            color: #ffe9b3;
+            color: #94d2bd;
         }
 
-        .toggle-btn {
-            background: #ff7eb3;
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #005f73;
             color: white;
             border: none;
-            padding: 8px 16px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 20px;
+            border-radius: 4px;
+            text-decoration: none;
             transition: background 0.3s;
         }
 
-        .toggle-btn:hover {
-            background: #ff758c;
+        .btn:hover {
+            background: #0a9396;
         }
 
         section {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 40px auto;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transform: scale(0.95);
-            animation: fadeInPop 1s forwards;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
         }
 
-        section:nth-of-type(2) { animation-delay: 0.3s; }
-        section:nth-of-type(3) { animation-delay: 0.6s; }
-        section:nth-of-type(4) { animation-delay: 0.9s; }
-        section:nth-of-type(5) { animation-delay: 1.2s; }
-
         h2 {
-            color: #ff7eb3;
-            border-bottom: 3px dashed #ff758c;
+            color: #005f73;
+            border-bottom: 2px solid #94d2bd;
             padding-bottom: 5px;
         }
 
@@ -148,7 +118,7 @@
         }
 
         a {
-            color: #ff758c;
+            color: #0a9396;
             text-decoration: none;
         }
 
@@ -159,26 +129,9 @@
         footer {
             text-align: center;
             padding: 20px;
-            background: #ff7eb3;
+            background: #005f73;
             color: white;
-            border-top: 5px dotted #ffb347;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #ffb347;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            text-decoration: none;
-            transition: background 0.3s;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: #ff758c;
+            border-top: 4px solid #0a9396;
         }
 
         .whatsapp-box {
@@ -188,8 +141,8 @@
             background: #25D366;
             color: white;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -204,27 +157,50 @@
         }
 
         .project-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: #f0f0f0;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        @keyframes fadeInPop {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        .timeline {
+            border-left: 3px solid #005f73;
+            padding-left: 20px;
+            margin-left: 10px;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background-color: #0a9396;
+            border-radius: 50%;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #0a9396;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+            margin-top: 5px;
         }
 
         @media (max-width: 768px) {
@@ -232,7 +208,6 @@
                 display: block;
                 margin: 10px 0;
             }
-
             section {
                 margin: 20px;
                 padding: 20px;
@@ -241,45 +216,99 @@
     </style>
 </head>
 
-<body onload="initSite()">
-    <div id="loader"><div></div></div>
+<body onload="hideLoader()">
     <div id="progressBar"></div>
 
     <header>
-        <h1><span id="typing"></span> 🎉</h1>
+        <h1>Vishal Singh</h1>
         <p>Postgraduate Student | Economic Sciences | Data Analysis & Research</p>
-        <a class="btn" href="mailto:vishalsingh272876@gmail.com" onclick="fireConfetti()">Let's Connect!</a>
-        <a class="btn" href="/Vishal_Singh_Resume.pdf" download onclick="fireConfetti()">Grab My Resume 🎓</a>
-        <button class="toggle-btn" onclick="toggleMode(); fireConfetti();">Toggle Theme 🎨</button>
+        <a class="btn" href="mailto:vishalsingh272876@gmail.com">Contact Me</a>
+        <a class="btn" href="/Vishal_Singh_Resume.pdf" download>Download Resume</a>
     </header>
 
     <nav>
-        <a href="#about">About 😄</a>
-        <a href="#education">Education 🎓</a>
-        <a href="#experience">Experience 💼</a>
-        <a href="#projects">Projects 🚀</a>
-        <a href="#contact">Contact 📞</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Content Sections Here (omitted for brevity, already included) -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm Vishal Singh, a postgraduate student in Economic Sciences at IIT Kanpur with a passion for economics and data-driven decision making. I actively contribute to research initiatives and enjoy translating complex economic concepts into actionable insights.</p>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <ul>
+            <li><strong>IIT Kanpur</strong> — M.Sc. Economics, 2026 (CPI: 8.53/10)</li>
+            <li><strong>University of Delhi</strong> — B.A. (Hons) Economics, 2024 (CGPA: 8.014/10)</li>
+            <li><strong>Army Public School</strong> — XII: 94.8%, X: 96%</li>
+        </ul>
+    </section>
+
+    <section id="experience">
+        <h2>Experience Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Research Intern</strong> — International Journal for Research in Law and Management (Mar 2025)
+            </div>
+            <div class="timeline-item">
+                <strong>Research & Marketing Intern</strong> — Younity (May 2022)
+            </div>
+            <div class="timeline-item">
+                <strong>Research Sub-Head</strong> — Wirtschaft, DU (Sep 2023 - Apr 2024)
+            </div>
+            <div class="timeline-item">
+                <strong>Volunteer Roles</strong> — GenderCell, Prakriti, IITK Samanvay
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects & Publications</h2>
+        <div class="project-card">
+            <strong>Research Paper:</strong> Human Development Journey of Uttar Pradesh after Economic Reforms of 1991<br>
+            <a href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830_Human_Development_Journey_of_">Read the paper</a>
+        </div>
+        <div class="project-card">
+            <strong>CPI Analysis:</strong> Analyzing Inflation Trends Over Time<br>
+            <a href="https://github.com/singh-vishal-code/CPI-Analysis">View project on GitHub</a>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <h2>Achievements & Certifications</h2>
+        <span class="badge">HSBC Commercial Banking Simulation</span>
+        <span class="badge">Mastercard Advisors Job Simulation</span>
+        <span class="badge">Standard Bank Behavioural Economics</span>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Email: <a href="mailto:vishalsingh272876@gmail.com">vishalsingh272876@gmail.com</a></p>
+        <p>Phone: +91-9098272876</p>
+        <p>
+            <a href="https://www.linkedin.com/in/vishal-singh-iitk-eco/">LinkedIn</a> |
+            <a href="https://github.com/singh-vishal-code">GitHub</a> |
+            <a href="https://medium.com/@ECO-fin">Medium</a> |
+            <a href="https://www.hackerrank.com/profile/__coded_vishal__">HackerRank</a>
+        </p>
+    </section>
 
     <footer>
-        <p>Made with ☕ & 💡 by Vishal Singh. &copy; 2025</p>
+        <p>&copy; 2025 Vishal Singh. All rights reserved.</p>
     </footer>
 
     <a class="whatsapp-box" href="https://wa.me/919098272876" target="_blank" title="Let's chat on WhatsApp!">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="30">
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
-        function initSite() {
-            hideLoader();
-            typingEffect();
-        }
-
         function hideLoader() {
-            document.getElementById('loader').style.display = 'none';
+            document.getElementById('loader')?.style.display = 'none';
         }
 
         window.onscroll = function () {
@@ -288,28 +317,8 @@
             const scrolled = (winScroll / height) * 100;
             document.getElementById('progressBar').style.width = scrolled + '%';
         };
-
-        function toggleMode() {
-            document.body.classList.toggle('light-mode');
-        }
-
-        function fireConfetti() {
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        }
-
-        function typingEffect() {
-            const text = "Vishal Singh";
-            let index = 0;
-            function type() {
-                if (index < text.length) {
-                    document.getElementById('typing').innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(type, 150);
-                }
-            }
-            type();
-        }
     </script>
+
 </body>
 
 </html>
