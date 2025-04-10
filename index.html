@@ -326,14 +326,38 @@
     </div>
   </section>
 
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome -->
   <footer class="py-10 bg-gradient-to-r from-yellow-200 to-pink-200 text-center text-gray-700">
     <p>&copy; 2025 @ Vishal Singh. All Rights Reserved.</p>
     <div class="mt-2">
-      <button id="back-to-top" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition shadow-lg">
+      <button id="back-to-top" class="hidden px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition shadow-lg">
         <i class="fas fa-arrow-up"></i> Back to Top
       </button>
     </div>
   </footer>
+
+  <script>
+    const backToTopButton = document.getElementById('back-to-top');
+
+    // Show or hide the button based on scroll position
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.remove('hidden');
+      } else {
+        backToTopButton.classList.add('hidden');
+      }
+    });
+
+    // Scroll to top functionality
+    backToTopButton.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
