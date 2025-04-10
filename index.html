@@ -32,61 +32,163 @@
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
+    /* Shooting game styles */
+    #game-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+    .target {
+      position: absolute;
+      font-size: 24px;
+      cursor: pointer;
+      pointer-events: auto;
+      animation: float 3s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .explosion {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, rgba(255,200,0,0.8) 0%, rgba(255,100,0,0) 70%);
+      border-radius: 50%;
+      animation: explode 0.5s forwards;
+    }
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+    /* Typewriter effect */
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid orange;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: .15em;
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: orange; }
+    }
+    /* Floating animation */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    /* Button hover effect */
+    .btn-hover {
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-hover:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: all 0.5s;
+    }
+    .btn-hover:hover:after {
+      left: 100%;
+    }
+    /* Input focus effect */
+    .input-effect:focus {
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3);
+    }
   </style>
 </head>
 
 <body class="text-gray-800">
 
   <!-- Navigation -->
-  <header class="flex justify-between items-center p-6 bg-gradient-to-r from-pink-500 to-yellow-500 text-white sticky top-0 z-50">
-    <h1 class="text-2xl font-bold">Vishal Singh</h1>
+  <header class="flex justify-between items-center p-6 bg-gradient-to-r from-pink-500 to-yellow-500 text-white sticky top-0 z-50 shadow-lg">
+    <h1 class="text-2xl font-bold hover:text-yellow-200 transition">Vishal Singh</h1>
     <nav class="space-x-6">
-      <a href="#about" class="hover:underline">About</a>
-      <a href="#projects" class="hover:underline">Projects</a>
-      <a href="#resume" class="hover:underline">Resume</a>
-      <a href="#skills" class="hover:underline">Skills</a>
-      <a href="#contact" class="hover:underline">Contact</a>
+      <a href="#about" class="hover:underline hover:text-yellow-200 transition">About</a>
+      <a href="#projects" class="hover:underline hover:text-yellow-200 transition">Projects</a>
+      <a href="#resume" class="hover:underline hover:text-yellow-200 transition">Resume</a>
+      <a href="#skills" class="hover:underline hover:text-yellow-200 transition">Skills</a>
+      <a href="#contact" class="hover:underline hover:text-yellow-200 transition">Contact</a>
+      <button id="game-toggle" class="ml-4 px-3 py-1 bg-white text-pink-500 rounded-full text-sm hover:bg-yellow-200 transition">🎮 Play Game</button>
     </nav>
   </header>
 
+  <!-- Shooting Game -->
+  <div id="game-container"></div>
+
   <!-- Hero Section -->
-  <section class="text-center py-20 animated-bg text-white relative">
+  <section class="text-center py-20 animated-bg text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-10"></div>
     <div class="relative z-10">
-      <h2 class="text-4xl font-extrabold mb-4 animate-pulse">Hello, I'm Vishal Singh 👋</h2>
-      <p class="text-xl mb-6">Postgraduate Student | Economics & Data Analysis Enthusiast | Passionate about Economic Research</p>
-      <a href="#projects" class="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition">View My Work</a>
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-4 animate-pulse">Hello, I'm Vishal Singh <span class="wave">👋</span></h2>
+      <p class="text-xl md:text-2xl mb-6 typewriter">Postgraduate Student | Economics Enthusiast</p>
+      <div class="flex justify-center space-x-4">
+        <a href="#projects" class="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition btn-hover shadow-lg">View My Work</a>
+        <a href="#contact" class="bg-white text-pink-500 px-6 py-3 rounded-full hover:bg-gray-100 transition btn-hover shadow-lg">Contact Me</a>
+      </div>
     </div>
-    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
+    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay class="floating"></lottie-player>
   </section>
 
   <!-- About Section -->
   <section id="about" class="py-20 px-6 bg-white" data-aos="fade-up">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-pink-500">About Me</h2>
-      <p class="text-lg text-gray-700">I am Vishal Singh, a postgraduate student in Economic Sciences at IIT Kanpur. I hold a bachelor's degree in Economics from the University of Delhi with a CGPA of 8.014/10. My academic interests lie in data analysis, macroeconomics, and quantitative research. Passionate about combining theoretical knowledge with practical skills, I have pursued several internships and certifications to sharpen my understanding of economic models and market dynamics.</p>
+      <h2 class="text-3xl font-bold mb-6 text-pink-500 relative inline-block">
+        <span class="relative z-10">About Me</span>
+        <span class="absolute -bottom-1 left-0 w-full h-2 bg-yellow-200 z-0 opacity-70" style="transform: skewX(-15deg);"></span>
+      </h2>
+      <p class="text-lg text-gray-700 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+        I am Vishal Singh, a postgraduate student in Economic Sciences at IIT Kanpur. I hold a bachelor's degree in Economics from the University of Delhi. My academic interests lie in data analysis, macroeconomics, and quantitative research. Passionate about combining theoretical knowledge with practical skills, I have pursued several internships and certifications to sharpen my understanding of economic models and market dynamics.
+      </p>
     </div>
   </section>
 
   <!-- Resume Section -->
   <section id="resume" class="py-20 px-6 bg-gradient-to-r from-yellow-100 to-pink-200" data-aos="fade-up">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-yellow-600">Resume</h2>
+      <h2 class="text-3xl font-bold mb-6 text-yellow-600 relative inline-block">
+        <span class="relative z-10">Resume</span>
+        <span class="absolute -bottom-1 left-0 w-full h-2 bg-pink-200 z-0 opacity-70" style="transform: skewX(-15deg);"></span>
+      </h2>
       <div class="grid md:grid-cols-2 gap-8">
-        <div class="card p-6 bg-white rounded-2xl shadow-lg">
-          <h3 class="text-xl font-semibold text-pink-500 mb-2">Education 🎓</h3>
-          <ul class="text-gray-700">
-            <li><strong>IIT Kanpur:</strong> M.Sc. Economics, 2026 (CPI: 8.53/10)</li>
-            <li><strong>University of Delhi:</strong> B.A. (Hons) Economics, 2024 (CGPA: 8.014/10)</li>
-            <li><strong>Army Public School:</strong> XII: 94.8%, X: 96%</li>
+        <div class="card p-6 bg-white rounded-2xl shadow-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-yellow-50 transition-all">
+          <h3 class="text-xl font-semibold text-pink-500 mb-2 flex items-center justify-center">
+            <span class="mr-2">Education</span> <span class="text-yellow-500">🎓</span>
+          </h3>
+          <ul class="text-gray-700 space-y-2">
+            <li class="hover:text-pink-600 transition"><strong>IIT Kanpur:</strong> M.Sc. Economics, 2026</li>
+            <li class="hover:text-pink-600 transition"><strong>University of Delhi:</strong> B.A. (Hons) Economics, 2024</li>
           </ul>
         </div>
-        <div class="card p-6 bg-white rounded-2xl shadow-lg">
-          <h3 class="text-xl font-semibold text-pink-500 mb-2">Experience 💼</h3>
-          <ul class="text-gray-700">
-            <li>Research Intern, Int. Journal for Research in Law and Management (2025)</li>
-            <li>Research & Marketing Intern, Younity (2022)</li>
-            <li>Research Sub-Head, Wirtschaft DU (2023-2024)</li>
-            <li>Volunteer, GenderCell, Prakriti, IITK Samanvay</li>
+        <div class="card p-6 bg-white rounded-2xl shadow-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-yellow-50 transition-all">
+          <h3 class="text-xl font-semibold text-pink-500 mb-2 flex items-center justify-center">
+            <span class="mr-2">Experience</span> <span class="text-yellow-500">💼</span>
+          </h3>
+          <ul class="text-gray-700 space-y-2">
+            <li class="hover:text-pink-600 transition">Research Intern, Int. Journal for Research in Law and Management (2025)</li>
+            <li class="hover:text-pink-600 transition">Research & Marketing Intern, Younity (2022)</li>
+            <li class="hover:text-pink-600 transition">Research Sub-Head, Wirtschaft DU (2023-2024)</li>
+            <li class="hover:text-pink-600 transition">Volunteer: GenderCell, Prakriti, IITK Samanvay</li>
           </ul>
         </div>
       </div>
@@ -96,19 +198,37 @@
   <!-- Projects & Publications Section -->
   <section id="projects" class="py-20 px-6 bg-white" data-aos="fade-up">
     <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-pink-500">Projects & Publications 📊</h2>
+      <h2 class="text-3xl font-bold mb-6 text-pink-500 relative inline-block">
+        <span class="relative z-10">Projects & Publications</span>
+        <span class="absolute -bottom-1 left-0 w-full h-2 bg-yellow-200 z-0 opacity-70" style="transform: skewX(-15deg);"></span>
+      </h2>
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
-          <h3 class="text-xl font-semibold mb-2 text-pink-700">Research Paper</h3>
-          <p class="text-gray-700 mb-4">Human Development Journey of Uttar Pradesh after Economic Reforms of 1991. <a class="text-pink-600 hover:underline" href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830_Human_Development_Journey_of_">Read More →</a></p>
+        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all">
+          <div class="h-full flex flex-col">
+            <h3 class="text-xl font-semibold mb-2 text-pink-700">Research Paper</h3>
+            <p class="text-gray-700 mb-4 flex-grow">Human Development Journey of Uttar Pradesh after Economic Reforms of 1991.</p>
+            <a class="text-pink-600 hover:text-pink-800 hover:underline inline-flex items-center transition" href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830_Human_Development_Journey_of_">
+              Read More <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+          </div>
         </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
-          <h3 class="text-xl font-semibold mb-2 text-pink-700">CPI Analysis</h3>
-          <p class="text-gray-700 mb-4">Analyzing inflation trends over time using CPI data. <a class="text-pink-600 hover:underline" href="https://github.com/singh-vishal-code/CPI-Analysis">View Project →</a></p>
+        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all">
+          <div class="h-full flex flex-col">
+            <h3 class="text-xl font-semibold mb-2 text-pink-700">CPI Analysis</h3>
+            <p class="text-gray-700 mb-4 flex-grow">Analyzing inflation trends over time using CPI data.</p>
+            <a class="text-pink-600 hover:text-pink-800 hover:underline inline-flex items-center transition" href="https://github.com/singh-vishal-code/CPI-Analysis">
+              View Project <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+          </div>
         </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl">
-          <h3 class="text-xl font-semibold mb-2 text-pink-700">Simulations & Certifications</h3>
-          <p class="text-gray-700 mb-4">HSBC Commercial Banking, Mastercard Advisors, Standard Bank Behavioural Economics Simulations.</p>
+        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all">
+          <div class="h-full flex flex-col">
+            <h3 class="text-xl font-semibold mb-2 text-pink-700">Simulations & Certifications</h3>
+            <p class="text-gray-700 mb-4 flex-grow">HSBC Commercial Banking, Mastercard Advisors, Standard Bank Behavioural Economics Simulations.</p>
+            <a class="text-pink-600 hover:text-pink-800 hover:underline inline-flex items-center transition" href="#">
+              View Certificates <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -117,22 +237,50 @@
   <!-- Skills Section -->
   <section id="skills" class="py-20 px-6 bg-gradient-to-r from-pink-100 to-yellow-100" data-aos="fade-up">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-yellow-500">Skills & Tools 🛠️</h2>
+      <h2 class="text-3xl font-bold mb-6 text-yellow-500 relative inline-block">
+        <span class="relative z-10">Skills & Tools</span>
+        <span class="absolute -bottom-1 left-0 w-full h-2 bg-pink-200 z-0 opacity-70" style="transform: skewX(-15deg);"></span>
+      </h2>
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="card bg-white p-6 rounded-2xl shadow-lg">
+        <div class="card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
           <h3 class="text-xl font-semibold text-pink-500 mb-2">Technical Skills</h3>
-          <ul class="text-gray-700">
-            <li>Python (Pandas, NumPy, Matplotlib)</li>
-            <li>MS Office, Google Workspace</li>
-            <li>Data Analysis & Visualization</li>
+          <ul class="text-gray-700 space-y-2">
+            <li class="hover:text-pink-600 transition flex items-center">
+              <span class="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+              Python (Pandas, NumPy, Matplotlib)
+            </li>
+            <li class="hover:text-pink-600 transition flex items-center">
+              <span class="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+              MS Office, Google Workspace
+            </li>
+            <li class="hover:text-pink-600 transition flex items-center">
+              <span class="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+              Data Analysis & Visualization
+            </li>
           </ul>
         </div>
-        <div class="card bg-white p-6 rounded-2xl shadow-lg">
+        <div class="card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
           <h3 class="text-xl font-semibold text-pink-500 mb-2">Soft Skills & Languages</h3>
-          <ul class="text-gray-700">
-            <li>Critical Thinking, Leadership, Strategic Thinking</li>
-            <li>Languages: English (C1), Hindi (C2)</li>
+          <ul class="text-gray-700 space-y-2">
+            <li class="hover:text-pink-600 transition flex items-center">
+              <span class="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+              Critical Thinking, Leadership, Strategic Thinking
+            </li>
+            <li class="hover:text-pink-600 transition flex items-center">
+              <span class="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+              Languages: English (C1), Hindi (C2)
+            </li>
           </ul>
+        </div>
+      </div>
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="zoom-in">
+        <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center">
+          <i class="fab fa-python text-4xl text-blue-500 mb-2"></i>
+          <span class="font-medium">Python</span>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center">
+          <i class="fas fa-chart-line text-4xl text-green-500 mb-2"></i>
+          <span class="font-medium">Data Analysis</span>
         </div>
       </div>
     </div>
@@ -140,30 +288,215 @@
 
   <!-- Contact Section -->
   <section id="contact" class="py-20 px-6 bg-white" data-aos="fade-up">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-pink-500">Contact Me 📬</h2>
-      <p class="text-lg text-gray-700 mb-8">Feel free to reach out for collaborations or just a friendly chat!</p>
-      <div class="mb-6">
-        <a href="mailto:vishalsingh272876@gmail.com" class="text-pink-600 hover:text-pink-800 block">vishalsingh272876@gmail.com</a>
-        <a href="tel:+919098272876" class="text-pink-600 hover:text-pink-800 block">+91 90982 72876</a>
-      </div>
-      <div>
-        <a href="https://www.linkedin.com/in/vishal-singh-iitk-eco/" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/singh-vishal-code" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://medium.com/@ECO-fin" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-medium"></i> Medium</a>
-        <a href="https://www.researchgate.net/profile/Ajad_Singh2" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fas fa-graduation-cap"></i> ResearchGate</a>
-        <a href="https://www.hackerrank.com/profile/__coded_vishal__" class="mx-2 text-pink-600 hover:text-pink-800"><i class="fab fa-hackerrank"></i> HackerRank</a>
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6 text-pink-500 text-center relative inline-block">
+        <span class="relative z-10">Contact Me</span>
+        <span class="absolute -bottom-1 left-0 w-full h-2 bg-yellow-200 z-0 opacity-70" style="transform: skewX(-15deg);"></span>
+      </h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <div data-aos="fade-right">
+          <p class="text-lg text-gray-700 mb-8">Feel free to reach out for collaborations or just a friendly chat!</p>
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <i class="fas fa-envelope text-pink-500 text-xl mr-4"></i>
+              <a href="mailto:vishalsingh272876@gmail.com" class="text-pink-600 hover:text-pink-800 hover:underline transition">vishalsingh272876@gmail.com</a>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-phone text-pink-500 text-xl mr-4"></i>
+              <a href="tel:+919098272876" class="text-pink-600 hover:text-pink-800 hover:underline transition">+91 90982 72876</a>
+            </div>
+          </div>
+          <div class="mt-8 flex space-x-4 justify-center md:justify-start">
+            <a href="https://www.linkedin.com/in/vishal-singh-iitk-eco/" class="text-pink-600 hover:text-pink-800 text-2xl transition transform hover:-translate-y-1" title="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/singh-vishal-code" class="text-pink-600 hover:text-pink-800 text-2xl transition transform hover:-translate-y-1" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://medium.com/@ECO-fin" class="text-pink-600 hover:text-pink-800 text-2xl transition transform hover:-translate-y-1" title="Medium">
+              <i class="fab fa-medium"></i>
+            </a>
+            <a href="https://www.hackerrank.com/profile/__coded_vishal__" class="text-pink-600 hover:text-pink-800 text-2xl transition transform hover:-translate-y-1" title="HackerRank">
+              <i class="fab fa-hackerrank"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div data-aos="fade-left">
+          <form id="contact-form" class="bg-gradient-to-br from-pink-50 to-yellow-50 p-6 rounded-2xl shadow-lg">
+            <div class="mb-4">
+              <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+              <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-500 input-effect" required>
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-gray-700 mb-2">Your Email</label>
+              <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-500 input-effect" required>
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block text-gray-700 mb-2">Your Message</label>
+              <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-pink-500 input-effect" required></textarea>
+            </div>
+            <button type="submit" class="w-full bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition btn-hover shadow-lg">
+              Send Message <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+            <div id="form-message" class="mt-4 text-center hidden"></div>
+          </form>
+        </div>
       </div>
     </div>
   </section>
 
   <footer class="py-10 bg-gradient-to-r from-yellow-200 to-pink-200 text-center text-gray-700">
-    <p>&copy; 2025 Vishal Singh. All Rights Reserved.</p>
+    <p>&copy; 2025 @ Vishal Singh. All Rights Reserved.</p>
+    <div class="mt-2">
+      <button id="back-to-top" class="px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition shadow-lg">
+        <i class="fas fa-arrow-up"></i> Back to Top
+      </button>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
+    
+    // Shooting game
+    const gameToggle = document.getElementById('game-toggle');
+    const gameContainer = document.getElementById('game-container');
+    let gameActive = false;
+    const icons = ['📊', '📈', '💰', '💹', '🧮', '📉', '📊', '📚'];
+    let score = 0;
+    
+    gameToggle.addEventListener('click', () => {
+      gameActive = !gameActive;
+      gameContainer.style.display = gameActive ? 'block' : 'none';
+      gameToggle.textContent = gameActive ? '❌ Stop Game' : '🎮 Play Game';
+      
+      if (gameActive) {
+        startGame();
+      } else {
+        clearGame();
+      }
+    });
+    
+    function startGame() {
+      score = 0;
+      createTarget();
+    }
+    
+    function clearGame() {
+      gameContainer.innerHTML = '';
+    }
+    
+    function createTarget() {
+      if (!gameActive) return;
+      
+      const target = document.createElement('div');
+      target.className = 'target';
+      target.textContent = icons[Math.floor(Math.random() * icons.length)];
+      target.style.left = `${Math.random() * 80 + 10}%`;
+      target.style.top = '0';
+      target.style.fontSize = `${Math.random() * 20 + 24}px`;
+      
+      target.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hitTarget(target);
+      });
+      
+      gameContainer.appendChild(target);
+      
+      const duration = Math.random() * 3000 + 2000;
+      const animation = target.animate(
+        [
+          { top: '0', opacity: 1 },
+          { top: '80%', opacity: 1 }
+        ],
+        { duration, easing: 'linear' }
+      );
+      
+      animation.onfinish = () => {
+        target.remove();
+        if (gameActive) createTarget();
+      };
+    }
+    
+    function hitTarget(target) {
+      const explosion = document.createElement('div');
+      explosion.className = 'explosion';
+      explosion.style.left = `${target.offsetLeft + target.offsetWidth/2 - 25}px`;
+      explosion.style.top = `${target.offsetTop + target.offsetHeight/2 - 25}px`;
+      gameContainer.appendChild(explosion);
+      
+      setTimeout(() => {
+        explosion.remove();
+      }, 500);
+      
+      target.remove();
+      score++;
+      
+      if (gameActive) {
+        setTimeout(() => createTarget(), 300);
+      }
+    }
+    
+    gameContainer.addEventListener('click', (e) => {
+      if (e.target === gameContainer) {
+        // Missed click
+        const miss = document.createElement('div');
+        miss.className = 'explosion';
+        miss.style.left = `${e.clientX - 25}px`;
+        miss.style.top = `${e.clientY - 25}px`;
+        miss.style.background = 'radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(255,0,0,0) 70%)';
+        gameContainer.appendChild(miss);
+        
+        setTimeout(() => {
+          miss.remove();
+        }, 500);
+      }
+    });
+    
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(formData);
+      
+      // Here you would normally send the data to your server
+      // For demo purposes, we'll just show a success message
+      formMessage.textContent = "Thank you for your message! I'll get back to you soon.";
+      formMessage.className = 'mt-4 text-center text-green-600';
+      formMessage.classList.remove('hidden');
+      
+      // Reset form
+      contactForm.reset();
+      
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        formMessage.classList.add('hidden');
+      }, 5000);
+    });
+    
+    // Back to top button
+    const backToTop = document.getElementById('back-to-top');
+    
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
   </script>
 
 </body>
