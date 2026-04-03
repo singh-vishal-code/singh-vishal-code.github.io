@@ -8,127 +8,541 @@
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%); font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-    .card { transition: transform 0.3s, box-shadow 0.3s; }
-    .card:hover { transform: translateY(-10px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); }
-    .animated-bg { background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab); background-size:400% 400%; animation:gradient 15s ease infinite; }
-    @keyframes gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    :root {
+      --coral: #e85d4a;
+      --peach: #f4a261;
+      --cream: #fdf6ec;
+      --ink: #1a1a2e;
+      --muted: #6b6b80;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--ink); scroll-behavior: smooth; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(253,246,236,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,93,74,0.15);
+      padding: 14px 32px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-brand { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--coral); }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-left: 28px; text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--coral); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      position: relative; overflow: hidden; padding-top: 80px;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(232,93,74,0.18) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 20% 80%, rgba(244,162,97,0.12) 0%, transparent 60%);
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      max-width: 1100px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1;
+    }
+    .hero-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--peach); margin-bottom: 16px; }
+    .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); color: #fff; line-height: 1.1; margin-bottom: 20px; }
+    .hero-name span { color: var(--coral); font-style: italic; }
+    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 36px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { background: var(--coral); color: #fff; padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-ghost { border: 1.5px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--peach); color: var(--peach); }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stat-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; text-align: center; backdrop-filter: blur(8px); }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--peach); }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* SECTIONS */
+    section { padding: 100px 40px; }
+    .section-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); font-weight: 600; margin-bottom: 12px; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--ink); margin-bottom: 48px; }
+    .section-title em { color: var(--coral); font-style: italic; }
+    .max-w { max-width: 1100px; margin: 0 auto; }
+
+    /* ABOUT */
+    #about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 60px; align-items: start; }
+    .about-text p { font-size: 1.05rem; color: #444; line-height: 1.85; margin-bottom: 18px; }
+    .about-highlights { display: flex; flex-direction: column; gap: 16px; }
+    .highlight-item { background: var(--cream); border-left: 3px solid var(--coral); padding: 16px 20px; border-radius: 0 8px 8px 0; }
+    .highlight-item h4 { font-size: 0.82rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .highlight-item p { font-size: 0.9rem; color: var(--muted); }
+
+    /* SKILLS */
+    #skills { background: var(--cream); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; }
+    .skill-category { background: #fff; border-radius: 12px; padding: 28px; border: 1px solid rgba(232,93,74,0.1); }
+    .skill-category h3 { font-size: 0.78rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { background: var(--cream); color: var(--ink); font-size: 0.82rem; padding: 5px 14px; border-radius: 100px; border: 1px solid rgba(26,26,46,0.12); font-weight: 500; }
+
+    /* PROJECTS */
+    #projects { background: #fff; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .project-card {
+      border: 1px solid rgba(26,26,46,0.1); border-radius: 14px; padding: 28px;
+      background: #fff; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--coral), var(--peach));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(232,93,74,0.12); border-color: var(--coral); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-tag { font-size: 0.7rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 10px; }
+    .project-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+    .project-link { font-size: 0.82rem; font-weight: 600; color: var(--coral); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .project-link:hover { text-decoration: underline; }
+
+    /* EXPERIENCE & TRAINING */
+    #experience { background: var(--cream); }
+    .exp-card { background: #fff; border-radius: 14px; padding: 32px; border: 1px solid rgba(26,26,46,0.08); margin-bottom: 20px; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); }
+    .exp-org { font-size: 0.85rem; color: var(--coral); font-weight: 600; margin-top: 4px; }
+    .exp-date { font-size: 0.78rem; color: var(--muted); background: var(--cream); padding: 4px 12px; border-radius: 100px; font-weight: 500; white-space: nowrap; }
+    .exp-card ul { list-style: none; }
+    .exp-card ul li { font-size: 0.9rem; color: #555; line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 8px; }
+    .exp-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--coral); }
+
+    /* CERTIFICATIONS */
+    #certifications { background: #fff; }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .cert-item { background: var(--cream); border-radius: 10px; padding: 18px 22px; border: 1px solid rgba(232,93,74,0.1); display: flex; align-items: flex-start; gap: 14px; }
+    .cert-icon { color: var(--coral); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .cert-item p { font-size: 0.88rem; color: var(--ink); font-weight: 500; line-height: 1.4; }
+
+    /* ACCOMPLISHMENTS */
+    #accomplishments { background: linear-gradient(135deg, #1a1a2e, #0f3460); }
+    #accomplishments .section-title { color: #fff; }
+    #accomplishments .section-tag { color: var(--peach); }
+    .acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .acc-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 28px; backdrop-filter: blur(8px); }
+    .acc-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
+    .acc-card p { font-size: 0.87rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* TRAINING */
+    #training { background: var(--cream); }
+    .training-grid { columns: 3; column-gap: 24px; }
+    @media(max-width:768px) { .training-grid { columns: 2; } }
+    @media(max-width:480px) { .training-grid { columns: 1; } }
+    .training-item { break-inside: avoid; background: #fff; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; font-size: 0.87rem; color: var(--ink); border-left: 2px solid var(--coral); }
+
+    /* CONTACT */
+    #contact { background: #fff; }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .contact-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--ink); margin-bottom: 24px; }
+    .contact-line { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .contact-line i { color: var(--coral); width: 18px; }
+    .contact-line a, .contact-line span { font-size: 0.95rem; color: #444; text-decoration: none; }
+    .contact-line a:hover { color: var(--coral); }
+    .social-row { display: flex; gap: 16px; margin-top: 32px; }
+    .social-btn { width: 44px; height: 44px; border-radius: 10px; background: var(--cream); border: 1px solid rgba(26,26,46,0.1); display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 1.1rem; text-decoration: none; transition: all 0.2s; }
+    .social-btn:hover { background: var(--coral); color: #fff; border-color: var(--coral); transform: translateY(-2px); }
+    .contact-langs h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 16px; }
+    .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(26,26,46,0.07); }
+    .lang-name { font-weight: 500; font-size: 0.95rem; }
+    .lang-level { font-size: 0.78rem; color: var(--coral); font-weight: 600; background: rgba(232,93,74,0.08); padding: 3px 10px; border-radius: 100px; }
+
+    footer { background: var(--ink); color: rgba(255,255,255,0.45); text-align: center; padding: 28px; font-size: 0.82rem; }
+
+    @media(max-width: 768px) {
+      .hero-grid, .about-grid, .contact-inner { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      section { padding: 70px 20px; }
+      nav { padding: 12px 20px; }
+      .nav-links a { margin-left: 14px; font-size: 0.78rem; }
+    }
   </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-  <!-- Hero Section -->
-  <section class="text-center py-20 animated-bg text-white relative overflow-hidden">
-    <div class="absolute inset-0 bg-black opacity-10"></div>
-    <div class="relative z-10">
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-4 animate-pulse">Hello, I'm Vishal Singh 👋</h2>
-      <p class="text-xl md:text-2xl mb-6">Economics + Machine Learning | MSc IIT Kanpur</p>
-      <div class="flex justify-center space-x-4">
-        <a href="#projects" class="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition shadow-lg">View Projects</a>
-        <a href="#contact" class="bg-white text-pink-500 px-6 py-3 rounded-full hover:bg-gray-100 transition shadow-lg">Contact Me</a>
+  <nav>
+    <div class="nav-brand">VS</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certs</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-label">MSc Economic Sciences · IIT Kanpur</div>
+        <h1 class="hero-name">Vishal <span>Singh</span></h1>
+        <p class="hero-desc">Economics + Machine Learning researcher specializing in financial modeling, predictive analytics, and quantitative economics. Bridging theory with data-driven insights.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-ghost">Get in Touch</a>
+        </div>
       </div>
-    </div>
-    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json" background="transparent" speed="1" style="width: 250px; height: 250px; margin: 0 auto;" loop autoplay></lottie-player>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="py-20 px-6 bg-white" data-aos="fade-up">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-pink-500">About Me</h2>
-      <p class="text-lg text-gray-700 leading-relaxed">
-        I am Vishal Singh, a postgraduate student in Economic Sciences at IIT Kanpur. 
-        I completed my B.A (Hons) in Economics from University of Delhi. 
-        My academic interests include macroeconomics, financial risk, and quantitative modeling. 
-        I integrate theory with practical insights through projects, research, and internships.
-      </p>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="py-20 px-6 bg-white" data-aos="fade-up">
-    <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-pink-500">Projects & Research</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Resume-linked Projects -->
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> Stock Price Prediction</h3>
-          <p class="text-gray-700">Predictive Modeling with ANN & LSTM. Achieved better results with LSTM.</p>
-          <a href="https://github.com/singh-vishal-code/Predictive-Modeling-of-Stock-Prices-Using-ANN-and-LSTM" class="text-pink-600 hover:underline">View Repo</a>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">8.16</div>
+          <div class="stat-label">CPI / IIT Kanpur</div>
         </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> Bankruptcy Detection</h3>
-          <p class="text-gray-700">ML models for bankruptcy & money laundering detection.</p>
-          <a href="https://github.com/singh-vishal-code/Predicting-Bankruptcy-Detecting-Money-Laundering-using-Machine-Learning" class="text-pink-600 hover:underline">View Repo</a>
+        <div class="stat-card">
+          <div class="stat-num">321</div>
+          <div class="stat-label">AIR · GATE XH</div>
         </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> Macroeconomic Comparison</h3>
-          <p class="text-gray-700">Comparative analysis of India vs USA (consumption, labor, GDP shares).</p>
-          <a href="https://github.com/singh-vishal-code/Structural-Dynamics-of-National-Economies-A-Macroeconomic-Comparison" class="text-pink-600 hover:underline">View Repo</a>
+        <div class="stat-card">
+          <div class="stat-num">9+</div>
+          <div class="stat-label">Projects & Research</div>
         </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> Credit Risk Modeling</h3>
-          <p class="text-gray-700">Built credit risk classification models with Random Forest & CatBoost.</p>
-          <a href="https://github.com/singh-vishal-code/Credit-Risk-Analysis-using-Machine-Learning-Models" class="text-pink-600 hover:underline">View Repo</a>
-        </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> ARIMA Stock Forecasting</h3>
-          <p class="text-gray-700">ARIMA model for stock forecasting. Evaluated MAE & RMSE.</p>
-          <a href="https://github.com/singh-vishal-code/Stock-Price-Prediction-using-ARIMA-Model" class="text-pink-600 hover:underline">View Repo</a>
-        </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> Sharpe Ratio Portfolio</h3>
-          <p class="text-gray-700">Optimized portfolio design with Sharpe Ratio maximization.</p>
-          <a href="https://github.com/singh-vishal-code/Optimal-Portfolio-Design-via-Sharpe-Ratio-Maximization" class="text-pink-600 hover:underline">View Repo</a>
-        </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> Markowitz + Boosting</h3>
-          <p class="text-gray-700">Applied Markowitz Theory with Gradient Boosting for optimal portfolios.</p>
-          <a href="https://github.com/singh-vishal-code/Markowitz-Theory-with-Gradient-Boosting-for-Optimal-Portfolios" class="text-pink-600 hover:underline">View Repo</a>
-        </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> CPI & Recession</h3>
-          <p class="text-gray-700">CPI analysis + recession probability modeling with ML.</p>
-          <a href="https://github.com/singh-vishal-code/CPI-Analysis-and-Recession-Probability-Forecast" class="text-pink-600 hover:underline">View Repo</a>
-        </div>
-        <div class="card bg-gradient-to-br from-pink-200 to-yellow-100 p-6 rounded-2xl">
-          <h3 class="text-xl font-semibold text-pink-700"> Research Paper</h3>
-          <p class="text-gray-700">Human Development Journey of Uttar Pradesh after 1991 reforms.</p>
-          <a href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830_Human_Development_Journey_of_Uttar_Pradesh_after_Economic_Reforms_of_1991" class="text-pink-600 hover:underline">Read Paper</a>
+        <div class="stat-card">
+          <div class="stat-num">A*</div>
+          <div class="stat-label">Financial Risk</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills -->
-  <section id="skills" class="py-20 px-6 bg-gradient-to-r from-pink-100 to-yellow-100" data-aos="fade-up">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-yellow-500">Skills & Tools</h2>
-      <p class="text-lg">Python | LaTeX | SQL | Stata | MATLAB | Pandas | NumPy | Matplotlib | Scikit-learn | Plotly</p>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-20 px-6 bg-white" data-aos="fade-up">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6 text-pink-500">Contact Me</h2>
-      <p class="mb-4">Let’s connect for collaborations or research discussions!</p>
-      <p> <a href="mailto:vishals24@iitk.ac.in" class="text-pink-600 hover:underline">vishals24@iitk.ac.in</a></p>
-      <p> <a href="tel:+919098272876" class="text-pink-600 hover:underline">+91 90982 72876</a></p>
-      <div class="mt-6 flex justify-center space-x-6 text-2xl">
-        <a href="https://www.linkedin.com/in/vishal-singh-iitk-eco/" class="text-blue-600 hover:text-blue-800"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/singh-vishal-code" class="text-gray-800 hover:text-black"><i class="fab fa-github"></i></a>
-        <a href="https://medium.com/@ECO-fin" class="text-black hover:text-gray-700"><i class="fab fa-medium"></i></a>
+  <!-- ABOUT -->
+  <section id="about" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Who I Am</div>
+      <h2 class="section-title">Economist. <em>Data Scientist.</em> Builder.</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I am Vishal Singh, a postgraduate student in Economic Sciences at IIT Kanpur (Expected May 2026), with a B.A. (Hons) in Economics from the University of Delhi (CGPA: 8.014/10).</p>
+          <p>My academic interests span macroeconomics, financial risk, quantitative modeling, and operations management. I integrate economic theory with machine learning to build practical, insight-driven solutions across BFSI and policy domains.</p>
+          <p>I bring a structured, data-driven approach using Python, MATLAB, and statistical software to optimize workflows and support evidence-based decision-making.</p>
+        </div>
+        <div class="about-highlights">
+          <div class="highlight-item">
+            <h4>Education</h4>
+            <p>MSc Economic Sciences · IIT Kanpur<br>B.A. (Hons) Economics · University of Delhi</p>
+          </div>
+          <div class="highlight-item">
+            <h4>Focus Areas</h4>
+            <p>Macroeconomics · Financial Risk · ML in Finance · Portfolio Optimization</p>
+          </div>
+          <div class="highlight-item">
+            <h4>Accomplishments</h4>
+            <p>A* in Foundations of Financial Risk · AIR 321 in GATE-XH</p>
+          </div>
+          <div class="highlight-item">
+            <h4>Research</h4>
+            <p>Published on Human Development in Uttar Pradesh post-1991 reforms</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="py-6 bg-gradient-to-r from-yellow-200 to-pink-200 text-center text-gray-700">
-    <p>&copy; 2025 Vishal Singh. All Rights Reserved.</p>
+  <!-- SKILLS -->
+  <section id="skills" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Capabilities</div>
+      <h2 class="section-title">Skills & <em>Tools</em></h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3><i class="fas fa-code"></i> Programming</h3>
+          <div class="skill-pills">
+            <span class="pill">Python</span>
+            <span class="pill">MATLAB</span>
+            <span class="pill">SQL</span>
+            <span class="pill">LaTeX</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-chart-line"></i> Data & ML Libraries</h3>
+          <div class="skill-pills">
+            <span class="pill">Pandas</span>
+            <span class="pill">NumPy</span>
+            <span class="pill">Scikit-learn</span>
+            <span class="pill">Matplotlib</span>
+            <span class="pill">Plotly</span>
+            <span class="pill">TensorFlow</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-database"></i> Statistical Software</h3>
+          <div class="skill-pills">
+            <span class="pill">Stata</span>
+            <span class="pill">SPSS</span>
+            <span class="pill">EViews</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-brain"></i> Domain Expertise</h3>
+          <div class="skill-pills">
+            <span class="pill">Financial Modeling</span>
+            <span class="pill">Econometrics</span>
+            <span class="pill">Time Series</span>
+            <span class="pill">Portfolio Theory</span>
+            <span class="pill">Risk Modeling</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-tools"></i> Productivity</h3>
+          <div class="skill-pills">
+            <span class="pill">Google Workspace</span>
+            <span class="pill">Microsoft Office</span>
+            <span class="pill">Git / GitHub</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-search"></i> Research Methods</h3>
+          <div class="skill-pills">
+            <span class="pill">Data Analysis</span>
+            <span class="pill">Statistical Modeling</span>
+            <span class="pill">Research Methodology</span>
+            <span class="pill">Economic Analysis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Work</div>
+      <h2 class="section-title">Projects & <em>Research</em></h2>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-tag">Course Project · ECO723</div>
+          <h3>Stock Price Prediction (ANN & LSTM)</h3>
+          <p>Developed and compared ANN and LSTM models for predicting next-day stock prices using OHLC data and technical indicators. LSTM achieved superior performance on RMSE, MAPE, and MBE metrics.</p>
+          <a href="https://github.com/singh-vishal-code/Predictive-Modeling-of-Stock-Prices-Using-ANN-and-LSTM" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">Course Project · ECO613M</div>
+          <h3>Bankruptcy Detection & Money Laundering</h3>
+          <p>ML models (Logistic Regression, KNN, SVM, Decision Tree, Random Forest) on 78K+ firm-level records for bankruptcy prediction and Bitcoin dataset for money laundering detection. High ROC-AUC achieved.</p>
+          <a href="https://github.com/singh-vishal-code/Predicting-Bankruptcy-Detecting-Money-Laundering-using-Machine-Learning" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">Course Project · ECO702</div>
+          <h3>Macroeconomic Comparison: India vs USA</h3>
+          <p>Comparative analysis of consumption, investment, labor share, capital share and GDP dynamics. Examined the 2007–09 financial crisis and long-term per capita output trends.</p>
+          <a href="https://github.com/singh-vishal-code/Structural-Dynamics-of-National-Economies-A-Macroeconomic-Comparison" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">ML · Finance</div>
+          <h3>Credit Risk Modeling</h3>
+          <p>Built credit risk classification models using Random Forest and CatBoost to predict loan defaults. Includes feature engineering, model evaluation, and risk scoring pipeline.</p>
+          <a href="https://github.com/singh-vishal-code/Credit-Risk-Analysis-using-Machine-Learning-Models" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">Self Project · Time Series</div>
+          <h3>ARIMA Stock Price Forecasting</h3>
+          <p>Time series forecasting with ARIMA: trend analysis, stationarity checks, and parameter tuning. Evaluated accuracy using MAE and RMSE for reliable stock price predictions.</p>
+          <a href="https://github.com/singh-vishal-code/Stock-Price-Prediction-using-ARIMA-Model" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">Portfolio Optimization</div>
+          <h3>Sharpe Ratio Portfolio Optimization</h3>
+          <p>Designed optimal investment portfolios through Sharpe Ratio maximization. Implemented efficient frontier analysis and risk-return tradeoff visualization using Python.</p>
+          <a href="https://github.com/singh-vishal-code/Optimal-Portfolio-Design-via-Sharpe-Ratio-Maximization" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">Portfolio · ML</div>
+          <h3>Markowitz Theory + Gradient Boosting</h3>
+          <p>Applied Markowitz Modern Portfolio Theory enhanced with Gradient Boosting models to construct optimal portfolios, combining classical finance with modern ML techniques.</p>
+          <a href="https://github.com/singh-vishal-code/Markowitz-Theory-with-Gradient-Boosting-for-Optimal-Portfolios" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">Self Project · Macro</div>
+          <h3>CPI Analysis & Recession Probability</h3>
+          <p>CPI trend analysis for inflation patterns and ML-based recession probability modeling using macroeconomic indicators and time-series data. Visualized inflation–recession dynamics.</p>
+          <a href="https://github.com/singh-vishal-code/CPI-Analysis-and-Recession-Probability-Forecast" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag">Research Paper · Group Project</div>
+          <h3>Human Development in Uttar Pradesh (Post-1991)</h3>
+          <p>Analyzed HDI trends in UP from 1993–2021 across health, education, and income dimensions using NSSO, PLFS, and World Bank PPP data. Benchmarked against Kerala, Tamil Nadu, and Assam.</p>
+          <a href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830_Human_Development_Journey_of_Uttar_Pradesh_after_Economic_Reforms_of_1991" class="project-link" target="_blank"><i class="fas fa-file-alt"></i> Read Paper</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Experience</div>
+      <h2 class="section-title">Where I've <em>Contributed</em></h2>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Research Sub-Head</div>
+            <div class="exp-org">Wirtschaft – The Economics Society, IIT Kanpur</div>
+          </div>
+          <div class="exp-date">Sep 2023 – Apr 2024</div>
+        </div>
+        <ul>
+          <li>Authored and contributed articles for social media platforms, increasing visibility and engagement.</li>
+          <li>Edited 'Wirtschaft Weekly' newsletter, enhancing clarity and engagement for members.</li>
+          <li>Coordinated with departments to streamline operations and improve collaboration within the society.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title">Certifications & <em>Simulations</em></h2>
+      <div class="cert-grid">
+        <div class="cert-item">
+          <i class="fas fa-flask cert-icon"></i>
+          <p>Data Science Lab Certification — WorldQuant University</p>
+        </div>
+        <div class="cert-item">
+          <i class="fas fa-university cert-icon"></i>
+          <p>HSBC Commercial Banking Simulation — Forage</p>
+        </div>
+        <div class="cert-item">
+          <i class="fas fa-chart-bar cert-icon"></i>
+          <p>Mastercard Advisors & Consulting Services Job Simulation — Forage</p>
+        </div>
+        <div class="cert-item">
+          <i class="fas fa-brain cert-icon"></i>
+          <p>Standard Bank Behavioural Economics Job Simulation — Forage</p>
+        </div>
+        <div class="cert-item">
+          <i class="fab fa-python cert-icon"></i>
+          <p>Python Certificate — HackerRank</p>
+        </div>
+        <div class="cert-item">
+          <i class="fas fa-graduation-cap cert-icon"></i>
+          <p>Python Bootcamp Certificate — Udemy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCOMPLISHMENTS -->
+  <section id="accomplishments" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Highlights</div>
+      <h2 class="section-title">Key <em>Accomplishments</em></h2>
+      <div class="acc-grid">
+        <div class="acc-card">
+          <h3>A* Grade — Financial Risk</h3>
+          <p>Obtained top grade in Foundations of Financial Risk, demonstrating mastery in risk quantification and financial theory.</p>
+        </div>
+        <div class="acc-card">
+          <h3>AIR 321 — GATE XH</h3>
+          <p>Achieved All India Rank 321 in Graduate Aptitude Test in Engineering (Humanities & Social Sciences stream).</p>
+        </div>
+        <div class="acc-card">
+          <h3>Community & Events</h3>
+          <p>Participated in Swadeshi Sankalp 3km run; co-organized 5km Gender Cell Run; volunteered in Cleanliness Drive at Inter IIT Sports Meet 2024.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section id="training" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Academic Coursework</div>
+      <h2 class="section-title">Training & <em>Courses</em></h2>
+      <div class="training-grid">
+        <div class="training-item">Foundations of Financial Risk</div>
+        <div class="training-item">Game Theory Applications</div>
+        <div class="training-item">Applied Probability and Statistics</div>
+        <div class="training-item">Economic Data Analysis</div>
+        <div class="training-item">Computational Methods in Economics</div>
+        <div class="training-item">Mathematical Methods for Economics</div>
+        <div class="training-item">Applied Macroeconomics</div>
+        <div class="training-item">Advanced Topics in Microeconomics</div>
+        <div class="training-item">Microeconomics</div>
+        <div class="training-item">Econometrics I</div>
+        <div class="training-item">Econometrics II</div>
+        <div class="training-item">Public Economics</div>
+        <div class="training-item">Public Economics and Public Policy</div>
+        <div class="training-item">Money and Financial Markets</div>
+        <div class="training-item">Development Economics I</div>
+        <div class="training-item">Development Economics II</div>
+        <div class="training-item">Contemporary Economic Issues</div>
+        <div class="training-item">Environmental Economics</div>
+        <div class="training-item">Frontiers in Operations Management</div>
+        <div class="training-item">Bayesian Models and Data Analysis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" data-aos="fade-up">
+    <div class="max-w">
+      <div class="section-tag">Reach Out</div>
+      <h2 class="section-title">Let's <em>Connect</em></h2>
+      <div class="contact-inner">
+        <div class="contact-info">
+          <h3>Open to research collaborations, internships, and discussions on economics & data science.</h3>
+          <div class="contact-line">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:vishals24@iitk.ac.in">vishals24@iitk.ac.in</a>
+          </div>
+          <div class="contact-line">
+            <i class="fas fa-envelope-open"></i>
+            <a href="mailto:vishalsingh272876@gmail.com">vishalsingh272876@gmail.com</a>
+          </div>
+          <div class="contact-line">
+            <i class="fas fa-phone"></i>
+            <a href="tel:+919098272876">+91 90982 72876</a>
+          </div>
+          <div class="contact-line">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Kanpur, India 208016</span>
+          </div>
+          <div class="social-row">
+            <a href="https://www.linkedin.com/in/vishal-singh-iitk-eco/" class="social-btn" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/singh-vishal-code" class="social-btn" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://medium.com/@ECO-fin" class="social-btn" target="_blank"><i class="fab fa-medium"></i></a>
+          </div>
+        </div>
+        <div class="contact-langs">
+          <h3>Languages</h3>
+          <div class="lang-item">
+            <span class="lang-name">English</span>
+            <span class="lang-level">C2 Proficient</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">Hindi</span>
+            <span class="lang-level">Native</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Vishal Singh · MSc Economic Sciences · IIT Kanpur</p>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init({ duration: 1000, once: true });</script>
+  <script>AOS.init({ duration: 900, once: true, offset: 80 });</script>
 </body>
 </html>
 
