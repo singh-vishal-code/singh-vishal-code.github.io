@@ -4,11 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vishal Singh | Economics & Data Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     :root {
       --coral: #e85d4a;
@@ -16,158 +13,394 @@
       --cream: #fdf6ec;
       --ink: #1a1a2e;
       --muted: #6b6b80;
+      --card-h: 260px;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--ink); scroll-behavior: smooth; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--ink); overflow-x: hidden; }
 
-    /* NAV */
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--coral); border-radius: 99px; }
+
+    /* ── NAV ── */
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(253,246,236,0.85); backdrop-filter: blur(12px);
+      position: fixed; top: 0; width: 100%; z-index: 200;
+      background: rgba(253,246,236,0.88); backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(232,93,74,0.15);
-      padding: 14px 32px; display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 40px; display: flex; justify-content: space-between; align-items: center;
+      transition: box-shadow 0.3s;
     }
-    .nav-brand { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--coral); }
-    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-left: 28px; text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(232,93,74,0.1); }
+    .nav-brand {
+      font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--coral);
+      position: relative;
+    }
+    .nav-brand::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+      background: var(--coral); transition: width 0.3s;
+    }
+    .nav-brand:hover::after { width: 100%; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500; color: var(--muted); margin-left: 28px;
+      text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s; position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px;
+      background: var(--coral); transition: width 0.25s;
+    }
     .nav-links a:hover { color: var(--coral); }
+    .nav-links a:hover::after { width: 100%; }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
       position: relative; overflow: hidden; padding-top: 80px;
     }
+    /* animated orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.22; animation: orbFloat 8s ease-in-out infinite;
+    }
+    .orb-1 { width: 500px; height: 500px; background: var(--coral); top: -100px; right: -100px; animation-delay: 0s; }
+    .orb-2 { width: 350px; height: 350px; background: var(--peach); bottom: -80px; left: -60px; animation-delay: -3s; }
+    .orb-3 { width: 200px; height: 200px; background: #a78bfa; top: 40%; left: 40%; animation-delay: -5s; }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(30px,-20px) scale(1.05); }
+      66% { transform: translate(-20px,15px) scale(0.97); }
+    }
+    /* grid overlay */
     .hero::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(232,93,74,0.18) 0%, transparent 70%),
-                  radial-gradient(ellipse 50% 40% at 20% 80%, rgba(244,162,97,0.12) 0%, transparent 60%);
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
     .hero-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
       max-width: 1100px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1;
     }
-    .hero-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--peach); margin-bottom: 16px; }
-    .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); color: #fff; line-height: 1.1; margin-bottom: 20px; }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--peach);
+      margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-label::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--peach); }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem); color: #fff; line-height: 1.08; margin-bottom: 22px;
+      opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+    }
     .hero-name span { color: var(--coral); font-style: italic; }
-    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 36px; }
-    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary { background: var(--coral); color: #fff; padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s, transform 0.2s; }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-    .btn-ghost { border: 1.5px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.2s; }
-    .btn-ghost:hover { border-color: var(--peach); color: var(--peach); }
-    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .stat-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; text-align: center; backdrop-filter: blur(8px); }
-    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--peach); }
-    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-desc {
+      font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 40px;
+      opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+    }
+    .btn-primary {
+      background: var(--coral); color: #fff; padding: 13px 30px; border-radius: 6px;
+      text-decoration: none; font-weight: 600; font-size: 0.88rem;
+      transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.15); transform: translateX(-100%); transition: transform 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(232,93,74,0.4); }
+    .btn-primary:hover::after { transform: translateX(0); }
+    .btn-ghost {
+      border: 1.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.75);
+      padding: 13px 30px; border-radius: 6px; text-decoration: none;
+      font-weight: 500; font-size: 0.88rem; transition: all 0.25s;
+    }
+    .btn-ghost:hover { border-color: var(--peach); color: var(--peach); background: rgba(244,162,97,0.08); transform: translateY(-3px); }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; opacity: 0; animation: fadeUp 0.8s 1s forwards; }
+    .stat-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 26px 20px; text-align: center; backdrop-filter: blur(10px);
+      transition: transform 0.3s, background 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+    .stat-card:hover { transform: translateY(-6px) scale(1.02); background: rgba(255,255,255,0.1); border-color: rgba(244,162,97,0.4); }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: var(--peach); }
+    .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 6px; letter-spacing: 0.06em; text-transform: uppercase; }
 
-    /* SECTIONS */
+    @keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── SECTIONS ── */
     section { padding: 100px 40px; }
-    .section-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); font-weight: 600; margin-bottom: 12px; }
-    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--ink); margin-bottom: 48px; }
+    .section-tag {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--coral); font-weight: 600; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-tag::before { content: ''; display: inline-block; width: 20px; height: 1.5px; background: var(--coral); }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--ink); margin-bottom: 52px; }
     .section-title em { color: var(--coral); font-style: italic; }
     .max-w { max-width: 1100px; margin: 0 auto; }
 
-    /* ABOUT */
+    /* ── ABOUT ── */
     #about { background: #fff; }
     .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 60px; align-items: start; }
-    .about-text p { font-size: 1.05rem; color: #444; line-height: 1.85; margin-bottom: 18px; }
-    .about-highlights { display: flex; flex-direction: column; gap: 16px; }
-    .highlight-item { background: var(--cream); border-left: 3px solid var(--coral); padding: 16px 20px; border-radius: 0 8px 8px 0; }
-    .highlight-item h4 { font-size: 0.82rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-    .highlight-item p { font-size: 0.9rem; color: var(--muted); }
-
-    /* SKILLS */
-    #skills { background: var(--cream); }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; }
-    .skill-category { background: #fff; border-radius: 12px; padding: 28px; border: 1px solid rgba(232,93,74,0.1); }
-    .skill-category h3 { font-size: 0.78rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .pill { background: var(--cream); color: var(--ink); font-size: 0.82rem; padding: 5px 14px; border-radius: 100px; border: 1px solid rgba(26,26,46,0.12); font-weight: 500; }
-
-    /* PROJECTS */
-    #projects { background: #fff; }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-    .project-card {
-      border: 1px solid rgba(26,26,46,0.1); border-radius: 14px; padding: 28px;
-      background: #fff; transition: all 0.3s; position: relative; overflow: hidden;
+    .about-text p { font-size: 1.02rem; color: #444; line-height: 1.9; margin-bottom: 18px; }
+    .about-highlights { display: flex; flex-direction: column; gap: 14px; }
+    .highlight-item {
+      background: var(--cream); border-left: 3px solid var(--coral);
+      padding: 16px 20px; border-radius: 0 10px 10px 0;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .project-card::before {
+    .highlight-item:hover { transform: translateX(6px); box-shadow: -4px 0 0 var(--coral), 4px 4px 20px rgba(232,93,74,0.1); }
+    .highlight-item h4 { font-size: 0.75rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+    .highlight-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--cream); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .skill-category {
+      background: #fff; border-radius: 14px; padding: 28px;
+      border: 1px solid rgba(232,93,74,0.08);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .skill-category::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: linear-gradient(90deg, var(--coral), var(--peach));
-      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
     }
-    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(232,93,74,0.12); border-color: var(--coral); }
-    .project-card:hover::before { transform: scaleX(1); }
-    .project-tag { font-size: 0.7rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
-    .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 10px; }
-    .project-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
-    .project-link { font-size: 0.82rem; font-weight: 600; color: var(--coral); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-    .project-link:hover { text-decoration: underline; }
+    .skill-category:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(232,93,74,0.12); border-color: rgba(232,93,74,0.25); }
+    .skill-category:hover::before { transform: scaleX(1); }
+    .skill-category h3 { font-size: 0.75rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      background: var(--cream); color: var(--ink); font-size: 0.8rem; padding: 5px 14px;
+      border-radius: 100px; border: 1px solid rgba(26,26,46,0.1); font-weight: 500;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .pill:hover { background: var(--coral); color: #fff; border-color: var(--coral); transform: translateY(-2px); }
 
-    /* EXPERIENCE & TRAINING */
+    /* ── FLIP CARDS (Projects) ── */
+    #projects { background: #fff; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+
+    .flip-card {
+      perspective: 1000px;
+      height: var(--card-h);
+      cursor: pointer;
+    }
+    .flip-card-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-front, .flip-back {
+      position: absolute; inset: 0;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      border-radius: 16px; padding: 28px;
+      border: 1px solid rgba(26,26,46,0.1);
+    }
+    .flip-front {
+      background: #fff; display: flex; flex-direction: column; justify-content: space-between;
+      transition: border-color 0.3s;
+    }
+    .flip-card:hover .flip-front { border-color: rgba(232,93,74,0.3); }
+    .flip-back {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      transform: rotateY(180deg);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .project-tag { font-size: 0.68rem; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .flip-front h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 10px; flex: 1; }
+    .flip-front .front-foot { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); }
+    .flip-front .front-foot i { color: var(--coral); }
+    .flip-back h3 { font-family: 'DM Serif Display', serif; font-size: 1rem; color: #fff; margin-bottom: 12px; }
+    .flip-back p { font-size: 0.84rem; color: rgba(255,255,255,0.65); line-height: 1.65; flex: 1; }
+    .project-link {
+      font-size: 0.8rem; font-weight: 600; color: var(--peach); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+      border: 1px solid rgba(244,162,97,0.3); padding: 7px 14px; border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s; align-self: flex-start;
+    }
+    .project-link:hover { background: rgba(244,162,97,0.15); border-color: var(--peach); }
+
+    /* flip hint pulse on front */
+    .flip-hint {
+      position: absolute; top: 14px; right: 14px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(232,93,74,0.08); border: 1px solid rgba(232,93,74,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--coral); font-size: 0.7rem;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.15)} }
+
+    /* ── EXPERIENCE ── */
     #experience { background: var(--cream); }
-    .exp-card { background: #fff; border-radius: 14px; padding: 32px; border: 1px solid rgba(26,26,46,0.08); margin-bottom: 20px; }
+    .exp-card {
+      background: #fff; border-radius: 14px; padding: 32px;
+      border: 1px solid rgba(26,26,46,0.08); margin-bottom: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .exp-card::after {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+      background: linear-gradient(180deg, var(--coral), var(--peach));
+      transition: width 0.3s;
+    }
+    .exp-card:hover { transform: translateX(8px); box-shadow: -5px 0 0 var(--coral), 8px 0 30px rgba(232,93,74,0.1); }
     .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
     .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); }
-    .exp-org { font-size: 0.85rem; color: var(--coral); font-weight: 600; margin-top: 4px; }
-    .exp-date { font-size: 0.78rem; color: var(--muted); background: var(--cream); padding: 4px 12px; border-radius: 100px; font-weight: 500; white-space: nowrap; }
+    .exp-org { font-size: 0.84rem; color: var(--coral); font-weight: 600; margin-top: 4px; }
+    .exp-date { font-size: 0.75rem; color: var(--muted); background: var(--cream); padding: 4px 14px; border-radius: 100px; font-weight: 500; white-space: nowrap; }
     .exp-card ul { list-style: none; }
-    .exp-card ul li { font-size: 0.9rem; color: #555; line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 8px; }
+    .exp-card ul li { font-size: 0.9rem; color: #555; line-height: 1.7; padding-left: 18px; position: relative; margin-bottom: 8px; }
     .exp-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--coral); }
 
-    /* CERTIFICATIONS */
+    /* ── CERTIFICATIONS ── */
     #certifications { background: #fff; }
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .cert-item { background: var(--cream); border-radius: 10px; padding: 18px 22px; border: 1px solid rgba(232,93,74,0.1); display: flex; align-items: flex-start; gap: 14px; }
-    .cert-icon { color: var(--coral); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
-    .cert-item p { font-size: 0.88rem; color: var(--ink); font-weight: 500; line-height: 1.4; }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .cert-item {
+      background: var(--cream); border-radius: 12px; padding: 18px 22px;
+      border: 1px solid rgba(232,93,74,0.1); display: flex; align-items: flex-start; gap: 14px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .cert-item:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 12px 30px rgba(232,93,74,0.1); border-color: var(--coral); }
+    .cert-icon { color: var(--coral); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; transition: transform 0.3s; }
+    .cert-item:hover .cert-icon { transform: rotate(15deg) scale(1.2); }
+    .cert-item p { font-size: 0.86rem; color: var(--ink); font-weight: 500; line-height: 1.4; }
 
-    /* ACCOMPLISHMENTS */
-    #accomplishments { background: linear-gradient(135deg, #1a1a2e, #0f3460); }
+    /* ── ACCOMPLISHMENTS (FLIP CARDS) ── */
+    #accomplishments { background: linear-gradient(135deg, #1a1a2e, #0f3460); position: relative; overflow: hidden; }
+    #accomplishments::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(232,93,74,0.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(244,162,97,0.08) 0%, transparent 50%);
+    }
     #accomplishments .section-title { color: #fff; }
     #accomplishments .section-tag { color: var(--peach); }
-    .acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-    .acc-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 28px; backdrop-filter: blur(8px); }
+    #accomplishments .section-tag::before { background: var(--peach); }
+    .acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; position: relative; z-index: 1; }
+    .acc-card {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 32px; backdrop-filter: blur(10px);
+      transition: transform 0.3s, background 0.3s, border-color 0.3s;
+    }
+    .acc-card:hover { transform: translateY(-8px) scale(1.02); background: rgba(255,255,255,0.12); border-color: rgba(244,162,97,0.4); }
+    .acc-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; transition: transform 0.3s; }
+    .acc-card:hover .acc-icon { transform: scale(1.25) rotate(-5deg); }
     .acc-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
-    .acc-card p { font-size: 0.87rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .acc-card p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
 
-    /* TRAINING */
+    /* ── TRAINING ── */
     #training { background: var(--cream); }
-    .training-grid { columns: 3; column-gap: 24px; }
+    .training-grid { columns: 3; column-gap: 20px; }
     @media(max-width:768px) { .training-grid { columns: 2; } }
     @media(max-width:480px) { .training-grid { columns: 1; } }
-    .training-item { break-inside: avoid; background: #fff; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; font-size: 0.87rem; color: var(--ink); border-left: 2px solid var(--coral); }
+    .training-item {
+      break-inside: avoid; background: #fff; border-radius: 8px; padding: 11px 16px;
+      margin-bottom: 10px; font-size: 0.85rem; color: var(--ink);
+      border-left: 2.5px solid var(--coral);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .training-item:hover { transform: translateX(5px); box-shadow: -3px 0 0 var(--coral); }
 
-    /* CONTACT */
+    /* ── CONTACT ── */
     #contact { background: #fff; }
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-    .contact-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--ink); margin-bottom: 24px; }
-    .contact-line { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-    .contact-line i { color: var(--coral); width: 18px; }
-    .contact-line a, .contact-line span { font-size: 0.95rem; color: #444; text-decoration: none; }
-    .contact-line a:hover { color: var(--coral); }
-    .social-row { display: flex; gap: 16px; margin-top: 32px; }
-    .social-btn { width: 44px; height: 44px; border-radius: 10px; background: var(--cream); border: 1px solid rgba(26,26,46,0.1); display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 1.1rem; text-decoration: none; transition: all 0.2s; }
-    .social-btn:hover { background: var(--coral); color: #fff; border-color: var(--coral); transform: translateY(-2px); }
-    .contact-langs h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 16px; }
-    .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(26,26,46,0.07); }
+    .contact-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--ink); margin-bottom: 28px; line-height: 1.4; }
+    .contact-line { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .contact-icon-wrap {
+      width: 38px; height: 38px; border-radius: 10px; background: rgba(232,93,74,0.08);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-line:hover .contact-icon-wrap { background: var(--coral); transform: rotate(-8deg); }
+    .contact-line:hover .contact-icon-wrap i { color: #fff; }
+    .contact-icon-wrap i { color: var(--coral); font-size: 0.9rem; transition: color 0.2s; }
+    .contact-line a, .contact-line span { font-size: 0.95rem; color: #444; text-decoration: none; transition: color 0.2s; }
+    .contact-line:hover a { color: var(--coral); }
+    .social-row { display: flex; gap: 12px; margin-top: 36px; }
+    .social-btn {
+      width: 46px; height: 46px; border-radius: 12px; background: var(--cream);
+      border: 1px solid rgba(26,26,46,0.1); display: flex; align-items: center; justify-content: center;
+      color: var(--ink); font-size: 1.1rem; text-decoration: none;
+      transition: all 0.25s; position: relative; overflow: hidden;
+    }
+    .social-btn::before {
+      content: ''; position: absolute; inset: 0; background: var(--coral);
+      transform: translateY(100%); transition: transform 0.25s;
+    }
+    .social-btn i { position: relative; z-index: 1; transition: color 0.25s; }
+    .social-btn:hover::before { transform: translateY(0); }
+    .social-btn:hover { border-color: var(--coral); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(232,93,74,0.25); }
+    .social-btn:hover i { color: #fff; }
+    .contact-langs h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 20px; }
+    .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(26,26,46,0.07); }
     .lang-name { font-weight: 500; font-size: 0.95rem; }
-    .lang-level { font-size: 0.78rem; color: var(--coral); font-weight: 600; background: rgba(232,93,74,0.08); padding: 3px 10px; border-radius: 100px; }
+    .lang-level { font-size: 0.75rem; color: var(--coral); font-weight: 600; background: rgba(232,93,74,0.08); padding: 4px 12px; border-radius: 100px; }
 
-    footer { background: var(--ink); color: rgba(255,255,255,0.45); text-align: center; padding: 28px; font-size: 0.82rem; }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.4);
+      text-align: center; padding: 32px; font-size: 0.82rem;
+    }
+    footer span { color: var(--coral); }
 
-    @media(max-width: 768px) {
+    /* ── CURSOR DOT ── */
+    .cursor-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--coral);
+      position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.1s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--coral);
+      position: fixed; pointer-events: none; z-index: 9998;
+      transition: transform 0.15s, width 0.25s, height 0.25s, opacity 0.25s;
+      opacity: 0.5; transform: translate(-14px,-14px);
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 2.5px;
+      background: linear-gradient(90deg, var(--coral), var(--peach));
+      z-index: 300; transition: width 0.1s linear;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px) {
       .hero-grid, .about-grid, .contact-inner { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: 1fr 1fr; }
       section { padding: 70px 20px; }
       nav { padding: 12px 20px; }
-      .nav-links a { margin-left: 14px; font-size: 0.78rem; }
+      .nav-links a { margin-left: 12px; font-size: 0.75rem; }
+      .flip-card { height: 290px; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
+  <div class="cursor-dot" id="dot"></div>
+  <div class="cursor-ring" id="ring"></div>
+  <div class="progress-bar" id="progress"></div>
+
+  <nav id="nav">
     <div class="nav-brand">VS</div>
     <div class="nav-links">
       <a href="#about">About</a>
@@ -181,11 +414,14 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
     <div class="hero-grid">
       <div>
         <div class="hero-label">MSc Economic Sciences · IIT Kanpur</div>
         <h1 class="hero-name">Vishal <span>Singh</span></h1>
-        <p class="hero-desc">Economics + Machine Learning researcher specializing in financial modeling, predictive analytics, and quantitative economics. Bridging theory with data-driven insights.</p>
+        <p class="hero-desc">Economics + Machine Learning Professional specializing in Financial modeling, Predictive analytics, and Quantitative Economics. Bridging theory with data-driven insights.</p>
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">View Projects</a>
           <a href="#contact" class="btn-ghost">Get in Touch</a>
@@ -193,8 +429,8 @@
       </div>
       <div class="hero-stats">
         <div class="stat-card">
-          <div class="stat-num">MSc Economics</div>
-          <div class="stat-label">Education / IIT Kanpur</div>
+          <div class="stat-num">MSc</div>
+          <div class="stat-label">Economics · IIT Kanpur</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">321</div>
@@ -213,17 +449,17 @@
   </section>
 
   <!-- ABOUT -->
-  <section id="about" data-aos="fade-up">
+  <section id="about">
     <div class="max-w">
-      <div class="section-tag">Who I Am</div>
-      <h2 class="section-title">Economist. <em>Builder</em>.Data Scientist.</h2>
+      <div class="section-tag reveal">Who I Am</div>
+      <h2 class="section-title reveal reveal-delay-1">Economist. <em>Builder</em>. Data Scientist.</h2>
       <div class="about-grid">
-        <div class="about-text">
+        <div class="about-text reveal reveal-delay-2">
           <p>I am Vishal Singh, a PostGrad of Economic Sciences at IIT Kanpur, UnderGrad in Economics from the University of Delhi.</p>
           <p>My interests span Macroeconomics, Financial risk, Quantitative Modeling, and Operations Management. I integrate economic theory with machine learning to build practical, insight-driven solutions across BFSI and policy domains.</p>
           <p>I bring a structured, data-driven approach using Python, MATLAB, and statistical software to optimize workflows and support evidence-based decision-making.</p>
         </div>
-        <div class="about-highlights">
+        <div class="about-highlights reveal reveal-delay-3">
           <div class="highlight-item">
             <h4>Education</h4>
             <p>MSc Economic Sciences · IIT Kanpur<br>B.A. (Hons) Economics · University of Delhi</p>
@@ -246,137 +482,252 @@
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" data-aos="fade-up">
+  <section id="skills">
     <div class="max-w">
-      <div class="section-tag">Capabilities</div>
-      <h2 class="section-title">Skills & <em>Tools</em></h2>
+      <div class="section-tag reveal">Capabilities</div>
+      <h2 class="section-title reveal reveal-delay-1">Skills & <em>Tools</em></h2>
       <div class="skills-grid">
-        <div class="skill-category">
+        <div class="skill-category reveal reveal-delay-1">
           <h3><i class="fas fa-code"></i> Programming</h3>
           <div class="skill-pills">
-            <span class="pill">Python</span>
-            <span class="pill">MATLAB</span>
-            <span class="pill">R</span>
-            <span class="pill">LaTeX</span>
+            <span class="pill">Python</span><span class="pill">MATLAB</span>
+            <span class="pill">R</span><span class="pill">LaTeX</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category reveal reveal-delay-2">
           <h3><i class="fas fa-chart-line"></i> Data & ML Libraries</h3>
           <div class="skill-pills">
-            <span class="pill">Pandas</span>
-            <span class="pill">NumPy</span>
-            <span class="pill">Scikit-learn</span>
-            <span class="pill">Matplotlib</span>
+            <span class="pill">Pandas</span><span class="pill">NumPy</span>
+            <span class="pill">Scikit-learn</span><span class="pill">Matplotlib</span>
             <span class="pill">Plotly</span>
-            
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category reveal reveal-delay-3">
           <h3><i class="fas fa-database"></i> Statistical Software</h3>
           <div class="skill-pills">
             <span class="pill">Stata</span>
-      
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category reveal reveal-delay-1">
           <h3><i class="fas fa-brain"></i> Domain Expertise</h3>
           <div class="skill-pills">
-            <span class="pill">Financial Modeling</span>
-            <span class="pill">Econometrics</span>
-            <span class="pill">Time Series</span>
-            <span class="pill">Portfolio Theory</span>
+            <span class="pill">Financial Modeling</span><span class="pill">Econometrics</span>
+            <span class="pill">Time Series</span><span class="pill">Portfolio Theory</span>
             <span class="pill">Risk Modeling</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category reveal reveal-delay-2">
           <h3><i class="fas fa-tools"></i> Productivity</h3>
           <div class="skill-pills">
-            <span class="pill">Google Workspace</span>
-            <span class="pill">Microsoft Office</span>
+            <span class="pill">Google Workspace</span><span class="pill">Microsoft Office</span>
             <span class="pill">GitHub</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category reveal reveal-delay-3">
           <h3><i class="fas fa-search"></i> Research Methods</h3>
           <div class="skill-pills">
-            <span class="pill">Data Analysis</span>
-            <span class="pill">Statistical Modeling</span>
-            <span class="pill">Research Methodology</span>
-            <span class="pill">Economic Analysis</span>
+            <span class="pill">Data Analysis</span><span class="pill">Statistical Modeling</span>
+            <span class="pill">Research Methodology</span><span class="pill">Economic Analysis</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects" data-aos="fade-up">
+  <!-- PROJECTS — FLIP CARDS -->
+  <section id="projects">
     <div class="max-w">
-      <div class="section-tag">Work</div>
-      <h2 class="section-title">Projects & <em>Research</em></h2>
+      <div class="section-tag reveal">Work</div>
+      <h2 class="section-title reveal reveal-delay-1">Projects & <em>Research</em></h2>
       <div class="projects-grid">
 
-        <div class="project-card">
-          <div class="project-tag">Course Project · ECO723</div>
-          <h3>Stock Price Prediction (ANN & LSTM)</h3>
-          <p>Developed and compared ANN and LSTM models for predicting next-day stock prices using OHLC data and technical indicators. LSTM achieved superior performance on RMSE, MAPE, and MBE metrics.</p>
-          <a href="https://github.com/singh-vishal-code/Predictive-Modeling-of-Stock-Prices-Using-ANN-and-LSTM" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-1">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Course Project · ECO723</div>
+                <h3>Stock Price Prediction (ANN & LSTM)</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-chart-line"></i> ML · Finance</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">ECO723 · Deep Learning</div>
+                <h3>Stock Price Prediction</h3>
+                <p>Developed and compared ANN and LSTM models for predicting next-day stock prices using OHLC data and technical indicators. LSTM achieved superior RMSE, MAPE, and MBE metrics.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/Predictive-Modeling-of-Stock-Prices-Using-ANN-and-LSTM" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">Course Project · ECO613M</div>
-          <h3>Bankruptcy Detection & Money Laundering</h3>
-          <p>ML models (Logistic Regression, KNN, SVM, Decision Tree, Random Forest) on 78K+ firm-level records for bankruptcy prediction and Bitcoin dataset for money laundering detection. High ROC-AUC achieved.</p>
-          <a href="https://github.com/singh-vishal-code/Predicting-Bankruptcy-Detecting-Money-Laundering-using-Machine-Learning" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-2">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Course Project · ECO613M</div>
+                <h3>Bankruptcy Detection & Money Laundering</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-shield-alt"></i> Risk · ML</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">ECO613M · Classification</div>
+                <h3>Bankruptcy & Money Laundering</h3>
+                <p>ML models (Logistic Regression, KNN, SVM, Decision Tree, Random Forest) on 78K+ firm-level records for bankruptcy prediction and Bitcoin dataset for money laundering detection.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/Predicting-Bankruptcy-Detecting-Money-Laundering-using-Machine-Learning" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">Course Project · ECO702</div>
-          <h3>Macroeconomic Comparison: India vs USA</h3>
-          <p>Comparative analysis of consumption, investment, labor share, capital share and GDP dynamics. Examined the 2007–09 financial crisis and long-term per capita output trends.</p>
-          <a href="https://github.com/singh-vishal-code/Structural-Dynamics-of-National-Economies-A-Macroeconomic-Comparison" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-3">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Course Project · ECO702</div>
+                <h3>Macroeconomic Comparison: India vs USA</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-globe"></i> Macroeconomics</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">ECO702 · Macro</div>
+                <h3>India vs USA Macro Dynamics</h3>
+                <p>Comparative analysis of consumption, investment, labor/capital share and GDP dynamics. Examined the 2007–09 financial crisis and long-term per capita output trends.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/Structural-Dynamics-of-National-Economies-A-Macroeconomic-Comparison" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">ML · Finance</div>
-          <h3>Credit Risk Modeling</h3>
-          <p>Built credit risk classification models using Random Forest and CatBoost to predict loan defaults. Includes feature engineering, model evaluation, and risk scoring pipeline.</p>
-          <a href="https://github.com/singh-vishal-code/Credit-Risk-Analysis-using-Machine-Learning-Models" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-1">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">ML · Finance</div>
+                <h3>Credit Risk Modeling</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-credit-card"></i> Credit Risk</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">ML · Finance</div>
+                <h3>Credit Risk Modeling</h3>
+                <p>Built credit risk classification using Random Forest and CatBoost to predict loan defaults. Includes feature engineering, model evaluation, and a risk scoring pipeline.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/Credit-Risk-Analysis-using-Machine-Learning-Models" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">Self Project · Time Series</div>
-          <h3>ARIMA Stock Price Forecasting</h3>
-          <p>Time series forecasting with ARIMA: trend analysis, stationarity checks, and parameter tuning. Evaluated accuracy using MAE and RMSE for reliable stock price predictions.</p>
-          <a href="https://github.com/singh-vishal-code/Stock-Price-Prediction-using-ARIMA-Model" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-2">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Self Project · Time Series</div>
+                <h3>ARIMA Stock Price Forecasting</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-wave-square"></i> Time Series</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">Time Series · ARIMA</div>
+                <h3>ARIMA Forecasting</h3>
+                <p>Time series forecasting with ARIMA: trend analysis, stationarity checks, and parameter tuning. Evaluated accuracy using MAE and RMSE for reliable stock price predictions.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/Stock-Price-Prediction-using-ARIMA-Model" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">Portfolio Optimization</div>
-          <h3>Sharpe Ratio Portfolio Optimization</h3>
-          <p>Designed optimal investment portfolios through Sharpe Ratio maximization. Implemented efficient frontier analysis and risk-return tradeoff visualization using Python.</p>
-          <a href="https://github.com/singh-vishal-code/Optimal-Portfolio-Design-via-Sharpe-Ratio-Maximization" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-3">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Portfolio Optimization</div>
+                <h3>Sharpe Ratio Portfolio Optimization</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-balance-scale"></i> Portfolio Theory</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">Portfolio · Python</div>
+                <h3>Sharpe Ratio Optimization</h3>
+                <p>Designed optimal investment portfolios through Sharpe Ratio maximization. Implemented efficient frontier analysis and risk-return tradeoff visualization using Python.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/Optimal-Portfolio-Design-via-Sharpe-Ratio-Maximization" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">Portfolio · ML</div>
-          <h3>Markowitz Theory + Gradient Boosting</h3>
-          <p>Applied Markowitz Modern Portfolio Theory enhanced with Gradient Boosting models to construct optimal portfolios, combining classical finance with modern ML techniques.</p>
-          <a href="https://github.com/singh-vishal-code/Markowitz-Theory-with-Gradient-Boosting-for-Optimal-Portfolios" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-1">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Portfolio · ML</div>
+                <h3>Markowitz Theory + Gradient Boosting</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-project-diagram"></i> Hybrid ML</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">Portfolio · ML</div>
+                <h3>Markowitz + Gradient Boosting</h3>
+                <p>Applied Markowitz Modern Portfolio Theory enhanced with Gradient Boosting models to construct optimal portfolios, combining classical finance with modern ML techniques.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/Markowitz-Theory-with-Gradient-Boosting-for-Optimal-Portfolios" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">Self Project · Macro</div>
-          <h3>CPI Analysis & Recession Probability</h3>
-          <p>CPI trend analysis for inflation patterns and ML-based recession probability modeling using macroeconomic indicators and time-series data. Visualized inflation–recession dynamics.</p>
-          <a href="https://github.com/singh-vishal-code/CPI-Analysis-and-Recession-Probability-Forecast" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+        <div class="flip-card reveal reveal-delay-2">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Self Project · Macro</div>
+                <h3>CPI Analysis & Recession Probability</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-chart-area"></i> Macroeconomics</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">Macro · ML</div>
+                <h3>CPI & Recession Probability</h3>
+                <p>CPI trend analysis for inflation patterns and ML-based recession probability modeling using macroeconomic indicators and time-series data. Visualized inflation–recession dynamics.</p>
+              </div>
+              <a href="https://github.com/singh-vishal-code/CPI-Analysis-and-Recession-Probability-Forecast" class="project-link" target="_blank"><i class="fab fa-github"></i> View Repository</a>
+            </div>
+          </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-tag">Research Paper · Group Project</div>
-          <h3>Human Development in Uttar Pradesh (Post-1991)</h3>
-          <p>Analyzed HDI trends in UP from 1993–2021 across health, education, and income dimensions using NSSO, PLFS, and World Bank PPP data. Benchmarked against Kerala, Tamil Nadu, and Assam.</p>
-          <a href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830_Human_Development_Journey_of_Uttar_Pradesh_after_Economic_Reforms_of_1991" class="project-link" target="_blank"><i class="fas fa-file-alt"></i> Read Paper</a>
+        <div class="flip-card reveal reveal-delay-3">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-hint"><i class="fas fa-sync-alt"></i></div>
+              <div>
+                <div class="project-tag">Research Paper · Group Project</div>
+                <h3>Human Development in Uttar Pradesh (Post-1991)</h3>
+              </div>
+              <div class="front-foot"><i class="fas fa-file-alt"></i> Published Research</div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div class="project-tag" style="color:var(--peach)">Research · Development Eco</div>
+                <h3>UP Human Development Post-1991</h3>
+                <p>Analyzed HDI trends in UP from 1993–2021 across health, education, and income using NSSO, PLFS, and World Bank PPP data. Benchmarked against Kerala, Tamil Nadu, and Assam.</p>
+              </div>
+              <a href="https://www.researchgate.net/profile/Ajad_Singh2/publication/376173830" class="project-link" target="_blank"><i class="fas fa-file-alt"></i> Read Paper</a>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -384,11 +735,11 @@
   </section>
 
   <!-- EXPERIENCE -->
-  <section id="experience" data-aos="fade-up">
+  <section id="experience">
     <div class="max-w">
-      <div class="section-tag">Experience</div>
-      <h2 class="section-title">Where I've <em>Contributed</em></h2>
-      <div class="exp-card">
+      <div class="section-tag reveal">Experience</div>
+      <h2 class="section-title reveal reveal-delay-1">Where I've <em>Contributed</em></h2>
+      <div class="exp-card reveal reveal-delay-2">
         <div class="exp-header">
           <div>
             <div class="exp-role">Research SubHead</div>
@@ -406,32 +757,32 @@
   </section>
 
   <!-- CERTIFICATIONS -->
-  <section id="certifications" data-aos="fade-up">
+  <section id="certifications">
     <div class="max-w">
-      <div class="section-tag">Credentials</div>
-      <h2 class="section-title">Certifications & <em>Simulations</em></h2>
+      <div class="section-tag reveal">Credentials</div>
+      <h2 class="section-title reveal reveal-delay-1">Certifications & <em>Simulations</em></h2>
       <div class="cert-grid">
-        <div class="cert-item">
+        <div class="cert-item reveal reveal-delay-1">
           <i class="fas fa-flask cert-icon"></i>
           <p>Data Science Lab Certification — WorldQuant University</p>
         </div>
-        <div class="cert-item">
+        <div class="cert-item reveal reveal-delay-2">
           <i class="fas fa-university cert-icon"></i>
           <p>HSBC Commercial Banking Simulation — Forage</p>
         </div>
-        <div class="cert-item">
+        <div class="cert-item reveal reveal-delay-3">
           <i class="fas fa-chart-bar cert-icon"></i>
           <p>Mastercard Advisors & Consulting Services Job Simulation — Forage</p>
         </div>
-        <div class="cert-item">
+        <div class="cert-item reveal reveal-delay-1">
           <i class="fas fa-brain cert-icon"></i>
           <p>Standard Bank Behavioural Economics Job Simulation — Forage</p>
         </div>
-        <div class="cert-item">
+        <div class="cert-item reveal reveal-delay-2">
           <i class="fab fa-python cert-icon"></i>
           <p>Python Certificate — HackerRank</p>
         </div>
-        <div class="cert-item">
+        <div class="cert-item reveal reveal-delay-3">
           <i class="fas fa-graduation-cap cert-icon"></i>
           <p>Python Bootcamp Certificate — Udemy</p>
         </div>
@@ -440,33 +791,36 @@
   </section>
 
   <!-- ACCOMPLISHMENTS -->
-  <section id="accomplishments" data-aos="fade-up">
+  <section id="accomplishments">
     <div class="max-w">
-      <div class="section-tag">Highlights</div>
-      <h2 class="section-title">Key <em>Accomplishments</em></h2>
+      <div class="section-tag reveal">Highlights</div>
+      <h2 class="section-title reveal reveal-delay-1">Key <em>Accomplishments</em></h2>
       <div class="acc-grid">
-        <div class="acc-card">
+        <div class="acc-card reveal reveal-delay-1">
+          <span class="acc-icon">🏆</span>
           <h3>A* Grade — Financial Risk</h3>
           <p>Obtained top grade in Foundations of Financial Risk, demonstrating mastery in risk quantification and financial theory.</p>
         </div>
-        <div class="acc-card">
+        <div class="acc-card reveal reveal-delay-2">
+          <span class="acc-icon">🎯</span>
           <h3>AIR 321 — GATE XH</h3>
           <p>Achieved All India Rank 321 in Graduate Aptitude Test in Engineering (Humanities & Social Sciences stream).</p>
         </div>
-        <div class="acc-card">
+        <div class="acc-card reveal reveal-delay-3">
+          <span class="acc-icon">🤝</span>
           <h3>Community & Events</h3>
-          <p>Participated in Swadeshi Sankalp 3km run; co-organized 5km Gender Cell Run; volunteered in Cleanliness Drive at Inter IIT Sports Meet 2024.</p>
+          <p>Participated in Swadeshi Sankalp 3km Marathon; Co-organized 5km Gender Cell Run; Volunteered in Cleanliness Drive at Inter IIT Sports Meet 2024.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- TRAINING -->
-  <section id="training" data-aos="fade-up">
+  <section id="training">
     <div class="max-w">
-      <div class="section-tag">Academic Coursework</div>
-      <h2 class="section-title">Training & <em>Courses</em></h2>
-      <div class="training-grid">
+      <div class="section-tag reveal">Academic Coursework</div>
+      <h2 class="section-title reveal reveal-delay-1">Training & <em>Courses</em></h2>
+      <div class="training-grid reveal reveal-delay-2">
         <div class="training-item">Foundations of Financial Risk</div>
         <div class="training-item">Game Theory Applications</div>
         <div class="training-item">Applied Probability and Statistics</div>
@@ -492,23 +846,23 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" data-aos="fade-up">
+  <section id="contact">
     <div class="max-w">
-      <div class="section-tag">Reach Out</div>
-      <h2 class="section-title">Let's <em>Connect</em></h2>
+      <div class="section-tag reveal">Reach Out</div>
+      <h2 class="section-title reveal reveal-delay-1">Let's <em>Connect</em></h2>
       <div class="contact-inner">
-        <div class="contact-info">
-          <h3>Open to Work in Business Analysis and Consultancy, BFSI Sector, Research collaborations, and discussions on economics & data science.</h3>
+        <div class="contact-info reveal reveal-delay-2">
+          <h3>Open to roles in Business Analysis, Consultancy, BFSI, Research collaborations, and discussions on economics & data science.</h3>
           <div class="contact-line">
-            <i class="fas fa-envelope-open"></i>
+            <div class="contact-icon-wrap"><i class="fas fa-envelope-open"></i></div>
             <a href="mailto:vishalsingh272876@gmail.com">vishalsingh272876@gmail.com</a>
           </div>
           <div class="contact-line">
-            <i class="fas fa-phone"></i>
+            <div class="contact-icon-wrap"><i class="fas fa-phone"></i></div>
             <a href="tel:+919098272876">+91 90982 72876</a>
           </div>
           <div class="contact-line">
-            <i class="fas fa-map-marker-alt"></i>
+            <div class="contact-icon-wrap"><i class="fas fa-map-marker-alt"></i></div>
             <span>Kanpur, India 208016</span>
           </div>
           <div class="social-row">
@@ -517,7 +871,7 @@
             <a href="https://medium.com/@ECO-fin" class="social-btn" target="_blank"><i class="fab fa-medium"></i></a>
           </div>
         </div>
-        <div class="contact-langs">
+        <div class="contact-langs reveal reveal-delay-3">
           <h3>Languages</h3>
           <div class="lang-item">
             <span class="lang-name">English</span>
@@ -533,13 +887,51 @@
   </section>
 
   <footer>
-    <p>&copy; 2025 Vishal Singh · MSc Economic Sciences · IIT Kanpur</p>
+    <p>&copy; 2025 <span>Vishal Singh</span> · MSc Economic Sciences · IIT Kanpur</p>
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init({ duration: 900, once: true, offset: 80 });</script>
+  <script>
+    // ── Custom cursor ──
+    const dot = document.getElementById('dot');
+    const ring = document.getElementById('ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      dot.style.left = mx - 4 + 'px'; dot.style.top = my - 4 + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx - 18 + 'px'; ring.style.top = ry - 18 + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    document.querySelectorAll('a, button, .flip-card, .pill, .social-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '0.3'; });
+      el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.5'; });
+    });
+
+    // ── Scroll progress bar ──
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      progress.style.width = pct + '%';
+    });
+
+    // ── Nav shadow on scroll ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // ── Flip card toggle on click (mobile) ──
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+  </script>
 </body>
 </html>
-
-
-
